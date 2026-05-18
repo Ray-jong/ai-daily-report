@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>船井 Funai 直播帶貨進度表</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:#f8f6f3;color:#1e293b;padding:20px;min-height:100vh}
+.container{max-width:1200px;margin:0 auto}
+.header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-radius:16px;padding:32px 28px;margin-bottom:28px;color:#fff;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.header h1{font-size:28px;font-weight:700;margin-bottom:6px;letter-spacing:1px}
+.header .subtitle{color:#94a3b8;font-size:14px;margin-bottom:20px}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;max-width:800px;margin:0 auto}
+.stat-card{background:rgba(255,255,255,0.08);border-radius:12px;padding:16px;text-align:center;backdrop-filter:blur(8px)}
+.stat-card .num{font-size:32px;font-weight:700;margin-bottom:4px}
+.stat-card .num.blue{color:#60a5fa}
+.stat-card .num.amber{color:#fbbf24}
+.stat-card .num.green{color:#34d399}
+.stat-card .num.purple{color:#a78bfa}
+.stat-card .label{font-size:12px;color:#94a3b8}
+.filter-bar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
+.filter-btn{padding:8px 20px;border-radius:20px;border:1px solid #e2e8f0;background:#fff;color:#475569;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.filter-btn:hover{border-color:#2563eb;color:#2563eb}
+.filter-btn.active{background:#2563eb;color:#fff;border-color:#2563eb}
+.table-wrap{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);margin-bottom:24px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:#f1f5f9}
+th{padding:12px 14px;text-align:left;font-weight:600;color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid #e2e8f0}
+td{padding:11px 14px;border-bottom:1px solid #f1f5f9;vertical-align:top;line-height:1.5}
+tr:hover{background:#f8fafc}
+.badge{padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;display:inline-block}
+.badge-ok{background:#dcfce7;color:#166534}
+.badge-pending{background:#fef3c7;color:#92400e}
+.badge-none{background:#f1f5f9;color:#64748b}
+.badge-exclude{background:#fee2e2;color:#991b1b}
+a{color:#2563eb;text-decoration:none}
+a:hover{text-decoration:underline}
+.note-text{color:#64748b;font-size:12px;max-width:280px}
+.footer{text-align:center;padding:24px;color:#94a3b8;font-size:12px}
+.pending-box{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:18px 22px;margin-bottom:24px}
+.pending-box h3{color:#92400e;font-size:15px;margin-bottom:10px}
+.pending-item{display:flex;gap:8px;padding:6px 0;font-size:13px;color:#78350f;align-items:flex-start}
+.pending-item .idx{color:#d97706;font-weight:600;min-width:24px}
+@media(max-width:768px){
+  body{padding:12px}
+  .header{padding:24px 16px}
+  .header h1{font-size:22px}
+  .stats-row{grid-template-columns:1fr 1fr}
+  th,td{padding:8px 10px;font-size:12px}
+  .table-wrap{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <h1>船井 Funai</h1>
+  <div class="subtitle">直播帶貨合作進度表</div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="num blue">38</div><div class="label">總場次</div></div>
+    <div class="stat-card"><div class="num green">31</div><div class="label">已通過</div></div>
+    <div class="stat-card"><div class="num amber">7</div><div class="label">待調整</div></div>
+    <div class="stat-card"><div class="num purple">24</div><div class="label">短影音已上傳</div></div>
+  </div>
+</div>
+
+<!-- Filter -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterTable('all')">全部 (38)</button>
+  <button class="filter-btn" onclick="filterTable('ok')">已通過 (31)</button>
+  <button class="filter-btn" onclick="filterTable('pending')">待調整 (7)</button>
+  <button class="filter-btn" onclick="filterTable('none')">未審核 (0)</button>
+</div>
+
+<!-- Pending -->
+<div class="pending-box" id="pendingBox">
+  <h3>待辦事項：7 場直播待調整</h3>
+  <div class="pending-item"><span class="idx">1.</span>項次 04 — 糖酸丸-派樂 5/13：短影音有聲音沒字幕，待補上繁中字幕</div>
+  <div class="pending-item"><span class="idx">2.</span>項次 05 — 糖酸丸-派樂 5/13：短影音有背景音樂無聲音，待調整</div>
+  <div class="pending-item"><span class="idx">3.</span>項次 06 — 糖酸丸-派樂 5/16：M01 待補，字幕記得要繁中</div>
+  <div class="pending-item"><span class="idx">4.</span>項次 07 — 糖酸丸-派樂 5/17：短影音待上傳</div>
+  <div class="pending-item"><span class="idx">5.</span>項次 21 — 153直播 4/15：短影音待補</div>
+  <div class="pending-item"><span class="idx">6.</span>項次 34 — 甄馨代言人 4/17：尾款確認後放行</div>
+  <div class="pending-item"><span class="idx">7.</span>項次 35 — 秘密小舖 4/24：短影音需更新，待通知</div>
+</div>
+
+<!-- Table -->
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th>項次</th>
+  <th>直播日期</th>
+  <th>直播台</th>
+  <th>審核狀態</th>
+  <th>短影音</th>
+  <th>備註</th>
+</tr>
+</thead>
+<tbody>
+<tr data-status="ok"><td>01</td><td>2025-10-15</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">10/15 短影音完成</td></tr>
+<tr data-status="ok"><td>02</td><td>2025-10-22</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">10/22 短影音，維他命B群+魚油2.0</td></tr>
+<tr data-status="ok"><td>03</td><td>2025-10-29</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">10/29 兩則短影音上傳：多效錠、葉黃素</td></tr>
+<tr data-status="pending"><td>04</td><td>2025-11-13</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-pending">待調整</span></td><td><span class="badge badge-pending">待補</span></td><td class="note-text">有聲音沒字幕，待補上繁中字幕</td></tr>
+<tr data-status="pending"><td>05</td><td>2025-11-13</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-pending">待調整</span></td><td><span class="badge badge-pending">待補</span></td><td class="note-text">有背景音樂無聲音，待調整</td></tr>
+<tr data-status="pending"><td>06</td><td>2025-11-16</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-pending">待調整</span></td><td><span class="badge badge-pending">待補</span></td><td class="note-text">M01 待補，字幕記得要繁中</td></tr>
+<tr data-status="pending"><td>07</td><td>2025-11-17</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-pending">待調整</span></td><td><span class="badge badge-pending">待補</span></td><td class="note-text">短影音待上傳</td></tr>
+<tr data-status="ok"><td>08</td><td>2025-11-19</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">11/19 短影音完成</td></tr>
+<tr data-status="ok"><td>09</td><td>2025-11-26</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">11/26 短影音完成</td></tr>
+<tr data-status="exclude"><td>—</td><td>2025-11-27</td><td><a href="#" target="_blank">嘟嘟屋</a></td><td><span class="badge badge-exclude">不列入計算</span></td><td><span class="badge badge-none">—</span></td><td class="note-text">不列入場次計算</td></tr>
+<tr data-status="ok"><td>10</td><td>2025-12-03</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">12/3 短影音完成</td></tr>
+<tr data-status="ok"><td>11</td><td>2025-12-10</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">12/10 短影音完成</td></tr>
+<tr data-status="ok"><td>12</td><td>2025-12-17</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">12/17 短影音完成</td></tr>
+<tr data-status="ok"><td>13</td><td>2025-12-24</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">12/24 短影音完成</td></tr>
+<tr data-status="ok"><td>14</td><td>2026-01-07</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">1/7 短影音完成</td></tr>
+<tr data-status="ok"><td>15</td><td>2026-01-14</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">1/14 短影音完成</td></tr>
+<tr data-status="ok"><td>16</td><td>2026-01-21</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">1/21 短影音完成</td></tr>
+<tr data-status="ok"><td>17</td><td>2026-02-04</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">2/4 短影音完成</td></tr>
+<tr data-status="ok"><td>18</td><td>2026-02-11</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">2/11 短影音完成</td></tr>
+<tr data-status="ok"><td>19</td><td>2026-02-18</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">2/18 短影音完成</td></tr>
+<tr data-status="ok"><td>20</td><td>2026-02-25</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">2/25 短影音完成</td></tr>
+<tr data-status="pending"><td>21</td><td>2026-04-15</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-pending">待調整</span></td><td><span class="badge badge-pending">待補</span></td><td class="note-text">短影音待補</td></tr>
+<tr data-status="exclude"><td>—</td><td>2026-04-18</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-exclude">不列入計算</span></td><td><span class="badge badge-none">—</span></td><td class="note-text">不列入場次計算</td></tr>
+<tr data-status="ok"><td>22</td><td>2026-04-21</td><td><a href="#" target="_blank">秘密小舖</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">4/21 短影音完成</td></tr>
+<tr data-status="ok"><td>23</td><td>2026-03-25</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">3/25 短影音完成</td></tr>
+<tr data-status="ok"><td>24</td><td>2026-04-01</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">4/1 短影音完成</td></tr>
+<tr data-status="ok"><td>25</td><td>2026-04-08</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">4/8 短影音完成</td></tr>
+<tr data-status="ok"><td>26</td><td>2026-04-22</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">4/22 短影音完成</td></tr>
+<tr data-status="exclude"><td>—</td><td>2026-04-24</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-exclude">不列入計算</span></td><td><span class="badge badge-none">—</span></td><td class="note-text">不列入場次計算</td></tr>
+<tr data-status="ok"><td>27</td><td>2026-04-29</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">4/29 短影音完成</td></tr>
+<tr data-status="ok"><td>28</td><td>2026-03-14</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">3/14 短影音完成</td></tr>
+<tr data-status="ok"><td>29</td><td>2026-03-21</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">3/21 短影音完成</td></tr>
+<tr data-status="ok"><td>30</td><td>2026-03-28</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">3/28 短影音完成</td></tr>
+<tr data-status="ok"><td>31</td><td>2026-04-10</td><td><a href="#" target="_blank">秘密小舖</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">4/10 短影音完成</td></tr>
+<tr data-status="ok"><td>32</td><td>2026-04-17</td><td><a href="#" target="_blank">秘密小舖</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">4/17 短影音完成</td></tr>
+<tr data-status="exclude"><td>—</td><td>2026-04-30</td><td><a href="#" target="_blank">秘密小舖</a></td><td><span class="badge badge-exclude">不列入計算</span></td><td><span class="badge badge-none">—</span></td><td class="note-text">不列入場次計算</td></tr>
+<tr data-status="ok"><td>33</td><td>2026-04-29</td><td><a href="#" target="_blank">秘密小舖</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">4/29 短影音完成</td></tr>
+<tr data-status="pending"><td>34</td><td>2026-04-17</td><td><a href="#" target="_blank">甄馨代言人</a></td><td><span class="badge badge-pending">待調整</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">尾款確認後放行</td></tr>
+<tr data-status="pending"><td>35</td><td>2026-04-24</td><td><a href="#" target="_blank">秘密小舖</a></td><td><span class="badge badge-pending">待調整</span></td><td><span class="badge badge-pending">待補</span></td><td class="note-text">短影音需更新，待通知</td></tr>
+<tr data-status="exclude"><td>—</td><td>2026-04-30</td><td><a href="#" target="_blank">秘密小舖</a></td><td><span class="badge badge-exclude">不列入計算</span></td><td><span class="badge badge-none">—</span></td><td class="note-text">不列入場次計算</td></tr>
+<tr data-status="ok"><td>36</td><td>2026-05-06</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">5/6 短影音完成</td></tr>
+<tr data-status="ok"><td>37</td><td>2026-05-13</td><td><a href="#" target="_blank">糖酸丸-派樂</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">5/13 短影音完成</td></tr>
+<tr data-status="ok"><td>38</td><td>2026-05-13</td><td><a href="#" target="_blank">秘密小舖</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">5/13 短影音完成</td></tr>
+<tr data-status="exclude"><td>—</td><td>2026-05-06</td><td><a href="#" target="_blank">嘟嘟屋</a></td><td><span class="badge badge-exclude">不列入計算</span></td><td><span class="badge badge-none">—</span></td><td class="note-text">不列入場次計算</td></tr>
+<tr data-status="ok"><td>39</td><td>2026-05-01</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">5/1 短影音完成</td></tr>
+<tr data-status="ok"><td>40</td><td>2026-05-08</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">5/8 短影音完成</td></tr>
+<tr data-status="ok"><td>41</td><td>2026-05-12</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">5/12 短影音完成</td></tr>
+<tr data-status="ok"><td>42</td><td>2026-05-13</td><td><a href="#" target="_blank">153直播</a></td><td><span class="badge badge-ok">ok</span></td><td><span class="badge badge-ok">已上傳</span></td><td class="note-text">5/13 短影音完成</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="footer">
+  最後更新：2026-05-18 &nbsp;|&nbsp; 資料來源：船井 Funai 直播帶貨管理表
+</div>
+
+</div>
+<script>
+function filterTable(filter){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('tbody tr').forEach(row=>{
+    const status=row.dataset.status;
+    if(filter==='all'){row.style.display=''}
+    else if(filter==='ok'&&status==='ok'){row.style.display=''}
+    else if(filter==='pending'&&status==='pending'){row.style.display=''}
+    else if(filter==='none'&&(!status||status==='')){row.style.display=''}
+    else{row.style.display='none'}
+  });
+}
+</script>
+</body>
+</html>
