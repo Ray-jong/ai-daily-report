@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 新聞日報 — 2026年5月19日</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f5f0eb;color:#1a1a2e;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6}
+.container{max-width:960px;margin:0 auto;padding:24px 16px}
+
+/* Header */
+.header{text-align:center;padding:36px 0 20px}
+.header h1{font-size:26px;font-weight:700;color:#2d1b69;letter-spacing:1px}
+.header .date{color:#6b7280;font-size:14px;margin-top:4px}
+
+/* Stats */
+.stats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.stat-card{background:#fff;border-radius:10px;padding:10px 18px;box-shadow:0 1px 3px rgba(0,0,0,0.06);text-align:center;min-width:90px}
+.stat-card .num{font-size:22px;font-weight:700;color:#2d1b69}
+.stat-card .lbl{font-size:11px;color:#6b7280;margin-top:2px}
+
+/* Section */
+.section{margin-bottom:32px}
+.section-header{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px 10px 0 0;font-size:15px;font-weight:600;margin-bottom:0}
+.section-header .icon{font-size:20px}
+.section-panel{background:#fff;border-radius:0 0 10px 10px;padding:16px;box-shadow:0 2px 6px rgba(0,0,0,0.04)}
+
+/* App section - blue */
+.section-app .section-header{background:#eff6ff;color:#1e40af;border-left:3px solid #3b82f6}
+.section-app .section-panel{background:#fff}
+
+/* Taiwan section - amber */
+.section-tw .section-header{background:#fffbeb;color:#92400e;border-left:3px solid #f59e0b}
+.section-tw .section-panel{background:#fff}
+
+/* Business section - green */
+.section-biz .section-header{background:#ecfdf5;color:#065f46;border-left:3px solid #10b981}
+.section-biz .section-panel{background:#fff}
+
+/* Github section - purple */
+.section-gh .section-header{background:#f5f3ff;color:#5b21b6;border-left:3px solid #8b981;color:#065f46}
+/* Fix undisplayed CSS blocks above, I'll build fresh: */
+
+/* News card grid */
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.news-card{background:#fff;border:1px solid #f0ebe4;border-radius:8px;padding:12px;transition:box-shadow .15s;display:flex;gap:8px;align-items:flex-start}
+.news-card:hover{box-shadow:0 3px 12px 6px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04)}
+.news-rank{font-size:11px;font-weight:600;color:#94a3b8;min-width:18px;text-align:right;margin-top:2px;font-variant-numeric:tabular-nums;flex-shrink:0}
+.news-body{flex:1;min-width:0}
+.news-title{font-size:14px;font-weight:500;line-height:1.4;color:#1a1a2e;text-decoration:none;display:block}
+.news-title:hover{color:#3b82f6}
+.news-meta{display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap}
+.source-p}
+.news-source{font-size:11px;background:rgba(107,114,128,0.08);color:#64748b;padding:22px 8px;border-radius:4px}
+.news-date{font-size:11px;color:#94a3b8}
+
+/* GitHub specific */
+.gh-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gh-card{background:#fff;border:1px solid #f0ebe4;border-radius:8px;padding:12px;transition:box-shadow .15s}
+.gh-card:hover{box-shadow:0 2px 6px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04)}
+.gh-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.gh-name{font-size:13px;font-weight:500;color:#3b82f6;text-decoration:none;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gh-name:hover{color:#f59e0b;text-decoration:underline}
+.gh-stars{font-size:12px;color:#f59e0b;font-variant-numeric:tabular-nums;white-space:nowrap}
+.gh-desc{font-size:12px;color:#6b7280;m5px 0;line-height:1.4}
+.gh-bottom{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.gh-lang{font-size:10px;background:rgba(59,130,246,0.08);color:#3b82f6;padding:2px 6px;border-radius:4px}
+.gh-tag{font-size:10px;background:rgba(139,92,246,0.08);color:#7c3aed;padding:2px 6px;border-radius:4px}
+
+@media(max-width:700px){.news-grid,.gh-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+<h1>AI 新聞日報</h1>
+<div class="date">2026 年 5 月 19 日（週二）</div>
+</div>
+
+<!-- Stats -->
+<div class="stats">
+<div class="stat-card"><div class="num">15</div><div class="lbl">應用·產業</div></div>
+<div class="stat-card"><div class="num">10</div><div class="lbl">台灣政策</div></div>
+<div class="stat-card"><div class="num">10</div><div class="lbl">商業·投資</div></div>
+<div class="stat-card"><div class="num">12</div><div class="lbl">GitHub</div></div>
+</div>
+
+<!-- Section 1: AI Apps -->
+<div class="section section-app">
+<div class="section-header"><span class="icon">🤖</span>AI 應用與產業</div>
+<div class="section-panel">
+<div class="news-grid">
+
+<div class="news-card">
+<div class="news-rank">1</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMinAFBVV95cUxQSXZMVnFRQTgxYXhmcXhYeFRIUWdyU1VmalBmblFPdEZXb0E5bTU2bUFMelBISE1uQTRzeXpob285ajdKRTJXNjZRN3hlakFIV2piSXJHYXJQU1h3VnkxekNzY1h0Zi1iUDJ3a2hEYlpUcG0wOWh3QzVJOWluRWFSQVBiQURUUHlmMHZrOFNCY3Vyd1ZLbTMwMlBRZ3I?oc=5">開放式 AI 模型為何逐漸追上大型語言模型</a>
+<div class="news-meta"><span class="news-source">Computerworld</span><span class="news-date">5/19</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">2</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMi0wFBVV95cUxQMjVZVlV4eEczTjkyQmxManBwZDBVTlg1NXRWM2FoTzlnakFEbi1tSU9ONWVUZkZ2WDFTRzVOMTJTUW4zM3BSUkdFT2JZM3RGa3BTbVhKTGtG5dDI2Uzh1N1VNR3dqOGQ1cVlpckhFelJKLXVUbkczbEM1ZTg2NW13NW5kUGxhN1NmWXhqMVlYckNwWTR4bHFvSWhzeG1xRWpSdGlEMmp2WGQ1UzRDeDNaMnZjTUpGdW9NX3ZrOTUtMFFEcW53Y0xzME9neWJ3NUZZWE1v?oc=5">2026 年畢業生拒聽 AI 說教，講者學到慘痛教訓</a>
+<div class="news-meta"><span class="news-source">WPEC</span><span class="news-date">5/19</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">3</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxORnVpMXh5MXh5RjM1NzVpTHA1NHFMbzhheVVqUElRUXEyVGZOV0lFZ0I0VkZWRhdmdTelpMWDVLazJlaXlkd3ZVZHdTZ2VvR2oxZ251cng5aEFKdDh6NEJTeUlrQTJRa0xwTXJ0bFk0TTNpZy1zeTFkMDhocV9mZW5sNDNrRTJ6Rzhld3lySVBkZVJV?oc=5">Meta 重新調配 7,000 名員工全力投入 AI</a>
+<div class="news-meta"><span class="news-source">The New York Times</span><span class="news-date">5/19</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">4</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNeWwwWjYzZlRCZW1rVzl2UTVIUDBJdzZUR3BuZldFQ3ZLbGc3QzktVHFQcHhLajc5Q0lhNmFMbWRWNHl3SFJ5SXlDRjhoUDdCSkNqc09nME9yN0VJNmExNERQNUZDSHVsbV91Vzg2dngxam9fdWpfMXFrYmJET1dyRllFUzB0ZzJ6YmRHMVRPakR2Yklzd0N5YXFVV0g5blY4dlBkeTJ6TWctXzlLbC15SEhiNl90QW9rVTNVY0xSTVRBUGIwYXdaSnZsS09QNUVLT1dXbHVVZ0FHOUVacXRydzlSc2syT0t1ekE?oc=5">AI 引發爭議畢業季</a>
+<div class="news-meta"><span class="news-source">U.S. News & World Report</span><span class="news-date">5/19</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">5</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiwAFBiwAFBVV95cUxOOTJEWklvU25pTXl6OEFBb2tsbzkyTU5NYnRRTTd4U1hoc25QRzVXRkR0WTFqeWVqX24wZkxPMXd3aFJBcjJxekk1bkt5dmJpdjFmemJfYnBSc004RW1JOGRFcUFPRkprQnJrTktUSW5iV1NfSFVsVGVHbC1COHFLdmE2WTAxWlZwOWRMcXh0enV5YjZ3TklmQVpLMUd1ckN1NnRuekJTM3ZWWjliV3BPRFBHUHROd0xVTVZlM2RZQ0M?oc=5">AI 幻覺解決了嗎？2026 年聊天機器人準確度的真相</a>
+<div class="news-meta"><span class="news-source">Tech Times</span><span class="news-date">5/19</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">6</div>
+<div class="news-body">
+<a class=">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiigFBVV95cUxPb3ZidHk3dlU0cGtOeWZTbmNMYUl4YUxocWsxcWpZOFRrNTFHajFIanlqY1hlMkJFR3JRUE9tQ2xWbnY4YzNmTXQ2TEtjSWVEd0t0RjI4LWFmMzE2OXFnYkJtWXlTMDN1WWFVMlVUYTJoQ1NscHAwSVJqQU43emRUcXpTMjYwXzVidWc?oc=5">IBM Think 2026：從 AI 試點到營運模式</a>
+<div class="news-meta"><span class="news-source">Bain & Company</span><span class="news-date">5/14</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">7</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMisgFBVV95cUxOeTJXS1p3SXMxWXlqV1pZLVhJUkZ0TGdnczFSZ2lSOVQyWnQ0SFZRRjVCUDgzVi1jLWpyWHpXLVRRV2RzZnZkVVZiaGloSktwTEhhanhFMWdDU09qOWQ5QjdobDQzZVhTckNRQUxRWjdGTVhNdnc3a0ttZWJoRHlLWFRiSWg0MkwxhdHVCS2o3RS04RE5Jd1ZRTU1rcG9FR0JLektwS0lZbl9ycWlDeVFpT0tR?oc=5">教宗利奧將與 Anthropic 共同創辦人發布 AI 通諭</a>
+<div class="news-meta"><span class="news-source">National Catholic Reporter</span><span class="news-date">5/18</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">8</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMivgFBVV95cUxNWW1ucU5XMzJFTkI5OVgtSUp1bEZLbW12Q0JuMFBlRkZodlQ5dDRlTW1vcW5yM0RtM2hJUDQyTWhIX0tMZGJTRzJGQndLdnlJaGVRTXppdHhrc1hwM0p2ajIySUtWMTJlTUVzaGVwd1BLMjUxNm9VSXQ1c01rdnlyXlyX2FyX21wR1dOa1NiV3lxd25xZFM3aDBPQWotR0twZUUwQjBiN1dGelprZGYza0k4QlZvbUhfTkNSUmRXaUpB?oc5">Dell 發表桌邊代理式 AI，主打 Dell Technologies World 2026</a>
+<div class="news-meta"><span class="news-source">IT Pro</span><span class="news-date">5/18</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">9</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMigwFBVV95cUxQdDlJUFlTLVBweTlwanItOS1abFk3dlg4djVmUmNhX2xIVWlqd0RsdUNDVW5SeEpRbGtLakJJZG1aVC1BRDNPZGZyRmNvd1BPV1laTnBZNV9wTU5lQzkzTXNBWW5nOG5NOHhyVEd3ZTlobEZoWDZCODNjaXRLRVQwZlJrdw?oc=5">AI 產業報告：最新市場數據與發展趨勢</a>
+<div class="news-meta"><span class="news-source">YPulse</span><span class="news-date">5/13</span></div>
+</div>
+</div>
+
+<div class="news">
+<div class="news-card">
+<div class="news-card">
+<div class="news-rank">10</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMib0FVX3lxTE1xX0dEaUt2S19sM1c2d0dGLVVReldLbHBsdE1KdWpRU0lWRWozOUJPZnRwaXdQemdheXdJX0RIcjJZb0wxM2RTeDV4Tlg5NlNuU1RVRUxHR1JsTENtWXlsYURb212Y3FqRVhBTzlTaw?oc=5">AI 反彈浪潮成為真實商業風險</a>
+<div class="news-meta"><span class="news-source">Axios</span><span class="news-date">5/17</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">11</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMitAFBVV95cUxOWG80a0hmV3czalNkU09nb2Y4MVR6bjRYcWpLeS16Mnl1VVV4YTBPdXZyNVhUb042LVJMTW9VS2JPekJoZWhYeFdCeWtVZlAzUEUxSk1ZTUFrbThNTVljSHKNzBVRW04cW40UGxhak1xRHRPRU1qMDBhcTdrYVd6NDR2dHk5TnBzUGg5bjAtZzdLSzdjUkpEY0FnZGs0cGNSQ2EzYmJJY1NtTVBUT1c0TERocFk?oc=5">Google I/O 2026：Gemini AI 模型與 Android 17 新功能亮相</a>
+<div class="news-meta"><span class="news-source">Deccan Herald</span><span class="news-date">5/19</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">12</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMitgFBVV95cUxOZEJ2Zk80dVNTUlNaaTNta3NPTDdkYk9IUEJmeHJWVU9xX3ktWXpwVDRHcXpDeDBXd0JPMDg5amRuVDdzMkpjTWZibTZNdkJDVnVmZ2tzTWM3OXoyZWlHaXhFQW5EcUFxUWZxajh4TkV3MnVJYUlISjlUUEdScjhmNlZSeHVnaTBWdm1fZmlMV1d1aXUzWWJCNFNxMHZ0cmpVdlBsZnRCTDFBNjFKSlI1SlI5QUI4cXkzQQ?oc=5">新型圖片注入攻擊鎖定多模態 AI 模型</a>
+<div class="news-meta"><span class="news-source">csoonline.com</span><span class="news-date">5/18</span></div>
+</div>
+</div>
+
+ news-card"><div">
+<div class="news-rank">13</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMipAFBVV95cUxOXy1XSlBXRk5SUXNEZVk0Qlo0ekF5TWlxb3BZd1paYmI3aGl6cXl1bFRjVllzY0NxTS1FMUtwTjRhWjJFMk83RGV0YWJ2MmRzYkdHaXpRY3FzZTVjdDRlbmRUZDd1V25TRWxkV3I2a1dYcXdXTEd2QUM4WnFvUWZtQ3VCTkpVdFhJbWpoNkoydVN2UTNQRDN0cFBKZXI1UWNSQVlGUw?oc=5">2026 年畢業致詞最好別提 AI</a>
+<div class"news-meta"><span class="news-source">TechCrunch</span><span class="news-date">5/17</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">14</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMifkFVX3lxTFB3Um0wTW9MYVN3ZnEwZU1sMWxDTnNHYjM4cjg0OGhWa2k5N3Ywb3VfU2pVdEhlR0NqUVdwYUw5Zm82WFNUaGhGZ0o2anZxN2p5MFBiRURiQURiQlJEMkNpLXZ3UEtUbjMzTDJoYzVtRjF1UWNpcVZnQnVUVnhCb1Jwdw?oc=5">歐盟 AI 法案最新進展</a>
+<div class="news-meta"><span class="news-source">EU Digital Strategy</span><span class="news-date">5/11</span></div>
+</div>
+</div>
+
+    <div class="news-card">
+        <div class="news-rank">15</div>
+        <div class="news-body">
+            <a class="news-title" href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQSkZpcWhiU2hPd09oOG1uVEFrNE9NS2NFa0YxSzR6dUc2YWhKZXhsNXprZW5GX1FJTTI0eDV1X0dPelphZEVPMEZXRGlTaTNVRlJrY29VYl9IZlh6RTR5aWQybm1uT1RuU1luQkdkOGxWbjhTOEZDVUFXa3dWLTVyTUpTY0Q5em5wcHl4LUFodzFKMkNuWl9z?oc=5">Sam Altman 與 OpenAI 勝訴，擊敗 Elon Musk 訴訟</a>
+            <div class="news-meta"><span class="news-source">The Guardian</span><span class="news-date">5/18</span></div>
+        </div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- Section 2 Taiwan Policy -->
+<div class="section section-tw">
+<div class="section-header"><span class="><span class="icon">🏛️</span>台灣 AI 政策與監管</div>
+<div class="section-panel">
+<div class="news-grid">
+
+<div class="news-card">
+<div class="news-rank">1</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQUUY3dmtDakZxUzVjZXI1RDQ4Y2pheWE3NnhVRTZaU3dnMHVQLXNSRWVkd2thbU50aE53RS15LVBPWWV5RzZoakR3VG1NTXG1NTXpramN1TmJIRi02dGZWWktLNlpOSldDb1Rna0d6cTVuSWI3Y1BqVmZLdlM1ejlTUzBDYQ?oc=5">數發部次長侯宜秀：不走歐盟「分級」路線，台灣 AI 風險治理框架如何運作？</a>
+<div class="news-meta"><span class="news-source">未來城市＠天下</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">2</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE5sRFpKSVNRd2xNX29ZYnJMM25YZDJqR21vOTBEd3BvaUdlUW5BQXVQWXdQeEJKMGlFQWNmSktzSFczOXFaLWhIcURaZHEwZw?oc=5">數發部揭露 AI 風險分類框架草案最新進展：三大類 18 小類</a>
+<div class="news-meta"><span class="news-source">iThome</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">3</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiREFVX3lxTE96YVNuN2lsRXpKNHNoTWpTSERzbjVBckNxX05jQVBwSk5RelNlR0VNczFVeDdMcnNPeTVZOE1wcG5NUlVw?oc=5">AI 治理轉折年：啟動風險矩陣 × 國際標準工作流</a>
+<div class="news-meta"><span class="news-source">CIO Taiwan</span></div>
+
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">4</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMie0FVX3lxTE1aQVFVb1BjR2RjM1JkVDlDdmZEU0dCdmgwSFdTdGlRYVI2a1QycDFfeXhFLXlMQk1lTDR0OGJTLTRFdmR5MXJBTFpfVGxYRzU5VWlPQ29DYk5tVTFKRnQ4R3NYcjF5YjM0WjY2Yi1xcWtxd3BqYTdGRjFTZw?oc=5">AI 基本法借鏡國外：美專法重競爭、歐盟南韓有罰則</a>
+<div class="news-meta"><span class="news-source">104職場力</span></div>
+</div>
+     </div>
+
+<div class="news-card">
+<div class="news-rank">5</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE1IcWJsUG1HSThYRjdULURJRGk4N0FOeENZeUlLdXpyb3lnRVJ6d3lfTEh5NUE0bURlN1J2UWtweHg0ejMyZU1XMi0tTnlXZw?oc=5">GovTech 月報第 49 期：AI 基本法三讀通過，政院將設國家 AI 戰略特別委員會</a>
+<div class="news-meta"><span class="news-source">iThome</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">6</div>
+<div class="news-body">
+<a class=">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFBFMXZ4cUVySURlUHE0VEV6LXY4UGU0cE9mcF9hbmFITUxQTFh6RU15cHMzOEJTSzNwNWFTYUJ5VVJZM0k3M3FpSmw1RGVhSjdDWHlJ?oc=5">台灣 AI 治理新紀元：《人工智慧基本法》通過後的產業實戰解讀</a>
+<div class="news-meta"><span class="news-source">未來城市＠天下</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">7</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE10dloycXJRVWlpMXM1Wm5HN1hmdmNNVllHNVFWLXowbGRtR2tCWGwxTGpBenhLY3FkUFlsYXBUdXRWcTlhUTVpNllwU3E2Zw?oc=5">立院三讀通過 AI 基本法，國科會為主管機關、行政院設國家 AI 戰略委員會</a>
+<div class="news-meta"><span class="news-source">iThome</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">8</div>
+<div class=">
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE4zLWNIRk5ZVXo5bEU3MGRBSHpzbjV0Z25kQTFRLUlmZ3FzNTQxbFZXYWdTRE81ZlhzSmFSc3Q5R09pZXpOYUZZZGxOUjZTSVdtd2JLZXFaRGxBQQ?oc=5">思想坦克：AI 基本法實行後，成立國家 AI 戰略特別委員會之政策建議</a>
+<div class="news-meta"><span class="news-source">信傳媒</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">9</div>
+<div class="news-body">
+<a class="news-title" href="hTTPS://news.google.com/rss/articles/CBMiaEFVX3lxTE10RkVTM2gtTlBfLWJXUUF4MXFkTnBERmFBOWhJTk5lemw4el9qdTM2MjFaOWF6X2FiSGFqRWNKTjZkNVloN2JZOEdMTFM4bVpCSE9tVk5nUk9yc1JpNjNRWkl3Vy0zOUJi?oc=5">AI 醫療邁新紀元：資誠解析全球智慧醫療法規動態、直擊台灣發展痛點</a>
+<div class="news-meta"><span class="news-source">環球生技月刊</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">10</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiZEFVX3lxTFBhc1hLZEhSWVNreFlNOXowdURrb1hTdGtEdGh0cVlpcDFvQTRqWGphZ2ZDbkMzZi1LMlpjaDJGU0dBdHpkSmlWTV8xOWpISnU4M052eFJpVDhHakVqcjd6qcjd6UTJBSjc?oc=5">台灣立法推動 AI 上路：百工百業智慧轉型起跑</a>
+<div class="news-meta"><span class="news-source">中央社 CNA</span></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- Section 3 Busines -->
+<div class="section section-bt section-biz">
+<div class="section-header"><span class="icon">💼</span>商業與投資</div>
+<div class="section-panel">
+<div class="news-grid">
+
+<div class="news-card">
+<div class="news-rank">1</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxNUVRpWnpzel9pzel9vdWlfUTRyMGZwLVhXN2dmVDBNclBHRzhhNWx4MnVDSFBZNl8wZmxuZzlpZjZPTC0zMTZMRU9Udl9zWTB1X0FFR2ZBMGFQaWgydTVSY21qTzBkUWoyaTlGUHFJeVZybVZnb3d3YWoyRkZHeDVyLWszMmFPLUNZUmh0WUh3UG9ZejBFanRudmt5VV9YNmVSa1hmeWp2TE1CUWgtdw?oc=5">每週市場評論：AI 板塊持續領漲</a>
+<div class="news-meta"><span class="news-source">BlackRock</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">2</div>
+<div class="news-boardy">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMipwFBVV95cUxQX0lBRWZheV9vSk1vdXlnV2Jxa29menYycVN0SS1XalhaMVV4NkRHNFBGWEx3S3Z0M1JaRktPamp2UzZMRGhMem1hT0xJenFSMGRrWnFjMGloNtaUFpSWW9vTkJrWWtqbEtfRmFWS1mdHZnU1dySUEwcEZ1aHpKeDlMR0RRRS02cUplQ1lWeGRNV3lN3ZWVFR4NW1XSWZUbjZsSlpmNA?oc=5">2026 年八大 AI 新創公司</a>
+<div class="news-meta"><span class="news-source">The Motley Fool</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">3</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMihgFBVV95cUxPYVVkMUg5TTVySTJlUFJmX041MlVhYmpweFZIWkZBcGh2VGxSc09WYmtiN0Fvcy1kbkZveGlYeGVQd1phVko0eHFNdnFCR09PZThsSmhOamhOU1pmQTlPd3g1MmkxaTIzMzFhTh4aFFXM1pIOTNGellydnpkc3RKWnViM2Z6dkxUUQ?oc=5">2026 AI 市場趨勢：全球投資、風險與基礎建設布局</a>
+<div class="news-meta"><span class="news-source">Morgan Stanley</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">4</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMitAFBVV95cUxOWGhoV2p0ejNjMkltQkltQ3BEaEZaUXV6SGpUUVd6akVEck5HMUpxWmhRM2lid3UtRmdCOHItS1k0TFlzdEd6X3c4WDZTbUxfa284N3k3TEMzWmVHdE1fMjRWTjh0N3NnYVBHVWZSc1ZRUkVhZnBvaXNSS3VNSnQ3MDlsTDBXbC08LXFDZnZyVWJIMUk5SmRvdkFsMGNmTnBjUktkajZVX3lkYnlHcFVDN05ZaEp6U2Q?oc=5">科技公司透過債務市場籌資 AI 與雲端擴張</a>
+<div class="news-meta"><span class="news-source">Reuters</span></div>
+</div>
+
+</div>
+
+<div class="news-card">
+<div class="news-rank">5</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMihAFBVV95cUxORTBNMEJaeUpqNXpYWnNEYjk1eXFpOU9aQVdfS2JvSXB0bElUN1VYMGM1UTZ6REo5VzZjcHBPODRFdmZqQkIwX1FpWXdsbVRako0N1k2ZjBobzctanU4TWdpZW8tUURmMTBwMWM5VktrWVlHSk8zMW16RXh2anhRS282VVY?oc=5">2026 年 Q1 創投募資破紀錄，AI 熱潮推動新創投資達 3,000 億美元</a>
+<div class="news-meta"><span class="news-source">Crunchbase News</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">6</div>
+<div class="news-body">
+<a class="news-title" href-https://news.google.com/rss/articles/CBMifkFVX3lxTE5GbktsaFo4Nl81dFJfUVZVbUQ4ZmRyRkhKVXVscFdUME1EOHdpSUp4Zm4yRU9oOGhlcXFXeUNkYnh0UldsVkg5V2xfZkQ0VkxfWVY2MUJCcEo2T1dYd1NRRlpNMkJoeUJqNFhiSkN3UHI1ZXVhQW9QU2c1NklZdw?oc=5">AI 債務融資如何影響存續期供給與利率</a>
+<div class="news-meta"><span class="news-source">Fed. Reserve Bank of Dallas</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">7</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/CBMijwFBVV95cUxQZ0RPel9KWms3MVEtWUk0eXpGNnlUR3UxSFNFc0ltb0ltbEsyZDJBa0VpVTBtQVRTZmNoeTJWVWdSM3k3VllueXRZcjRCdVhfZXZLZ1lxY0J4WGI4SEdCc3BmWTFpXzVseWhuQzcxZEtmeDVjb09oN3NEQW5fUGhnam1iZjN1V3Z2QWNlazNuaXFPSQ?oc=5">2026 年 5 月表現最佳的 5 檔 AI 股票</a>
+<div class="news-meta"><span class="news-source">NerdWallet</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">8</div>
+<div class="news-body">
+<a class="news-title" href="https//news.google.com/rss/articles/CBMiakFVX3lxTE8zdHpiekFCLW5Rb216RERxWVNfcVcxaUlzanNVVDdzU1VZNHpNR18zR0ppQXZsNjc5ajZPY0tTWkVaZDVoOFlTYlZzZFZ2N0pQTTh1VXFWWXI2bnc2clFqTmRvWkdwT1ptdUE?oc=5">AI 熱潮背後的循環交易指南</a>
+<div class="news-meta"><span class="news-source">Bloomberg</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">9</div>
+<div class="news-body">
+<a class="news-title" href-https://news.google.com/rss/articles/CBMicEFVX3lxTFBaV2dlUGM4T0FUc2l5U3BlNmdUVEpwcE50SGNLU2o5ZWFXaVl4LU81QzVNR0JCSDdYTHRZcWRpWmdhSkMwalRISFBOV0NxV09oSWFuVDFpOG03a0E4bDB0pMC11VGxIWDBRM1d4bXBhQ1Y?oc=5">2026 年值得買入的 6 檔 AI ETF</a>
+<div class="news-meta"><span class="news-source">U.S. News Money</span></div>
+</div>
+</div>
+
+<div class="news-card">
+<div class="news-rank">10</div>
+<div class="news-body">
+<a class="news-title" href="https://news.google.com/rss/articles/UCBMiWUFVX3lxTE9ZbVZ2TFRpM24zRnZNOHFBX2JBTUN2ZTR4MWstTWhLdXk1b0FOcFVSRXpEc3RmREQlBNc0dPU25zUVBHN1VOU0kxMEphWFpTMlZfnM1WmRIWHd0ays1bw?oc=5">CEO 2026 優先事項：成長、韌性與 AI 投資回報率</a>
+<div class="news-meta"><span class="news-source">EY</span></div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- Section 4 GitHub
+<div class="section section-gh">
+<div class="section-header"span class="icon">📦</span>GitHub 熱門 AI 專案</div>
+<div class="section-panel">
+<div class="gh-grid">
+
+<div class="gh-card">
+<div class="gh-top>
+<a class="gh-name" href="https://github.com/wanshuiyin/ARIS-in-AI-Offer">wanshuiyin/ARIS-in-AI-Offer</a>
+<span class="gh-stars">⭐10</span>
+</div>
+<div class="gh-desc">AI 面試考古題大全：ML/LLM/多模態/生成式模型重點整理，手機與平板友善排版</div>
+<div class="gh-bottom"><span class="gh-lang">HTML</span><span class="gh-tag">求職資源</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top">
+<a class="gh-name" href="https://github.com/MuLabPKU/In-Parameter-Learning">MuLabPKU/In-Parameter-Learning</a>
+<span class="gh-stars">⭐10</span>⭐10</span>
+</div>
+<div="gh-desc">觀點論文：參數內學習 — 為何終身 AI 系統需要的不只是更長上下文</div>
+<div class="gh-bottom"><span class="gh-lang">論文</span><spanclass="gh-tag">學術研究</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top">
+<a class="gh-name" href="https://github.com/nashsu/llm_wiki_skill">nashsu/llm_wiki_skill</a>
+<span class="gh-stars">⭐8</span>
+</div>
+<div class="gh-desc">LLM Wiki 技能：為 AI Agent 打造可查詢的知識庫系統</div>
+<div class="gh-bottom"><span class="gh-lang">Python</span><span class="gh-tag">知識庫</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top">
+<a class="gh-name" href="https://github.com/jjihwan/LiteFrame">jjihwan/LiteFrame</a>
+<span class="gh-stars">⭐8</span>
+</div>
+<div class="gh-desc">LiteFrame：高效視覺編碼器解鎖影片 LLM 的幀率擴展能力</div>
+<div class="gh-bottom"><span class="gh-lang">Python</span><span class="gh-tag">影片AI</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top">
+<a class="gh-name" href="https://github.com/Lynnouo/yushio">Lynnouo/yushio</a>
+<span class="gh-stars">⭐8</span>
+</div>
+<div class="gh-desc">Yushio（夕潮）— 為 Claude Code 設計的 AI 協作人格，三層技能系統</div>
+<div class="gh-bottom"><span class="gh-lang">JavaScript</span><span class="gh-tag">AI工具</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top">
+<a class="gh-name" href="https://github.com/hourizon/sysu-lms-script-version-2-">hourizon/sysu-lms-script-2</a>
+<span class="gh-stars">⭐6</span>
+</div>
+<div class="gh-desc">中山大學 LMS 學習助手：全自動刷課、LLM 答題、自動跳轉</div>
+<div class="gh-bottom"><span class="gh-lang">JavaScript</span><span class="gh-tag">教育</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top">
+<a class="gh-name" href="https://github.com/osirishorus/opencoffer">osirishorus/opencoffer</a>
+<span class="gh-stars">⭐5</span>
+</div>
+<div-desc">自託管個人理財系統：SimpleFIN 同步、儀表板、BYO-LLM 對話、MCP 端點</div>
+<div class="gh-bottom"><span class="gh-lang">TypeScript</span><span class="gh-tag">理財工具</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top>
+<a class="gh-name" href="https://github.com/Forge21k/Based-Forge">Forge21k/Based-Forge</a>
+<span class="gh-stars">⭐5</span>
+</div>
+<div class="gh-desc">在 Base 鏈上用 AI Agent 挖礦 $FORGE 代幣</<div>
+<div class="gh-bottom"><span class="gh-lang">JavaScript</span><span class="gh-tag">區塊鏈</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top">
+<a class="gh-name" href="https://github.com/AdilShamim8/MathForAI">AdilShamim8/MathForAI</a>
+<span class="gh-stars">⭐3</span>
+</div>
+<div class="gh-desc">AI 數學為 AI：單頁模組化課程網站，教你現代 AI/ML 背後的數學</div>
+<div class="gh-bottom"><span class="gh-lang">HTML</span><span class="gh-tag">教學資源</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top">
+<a class="gh-name" href="https://github.com/sidkandan/CLIronChef">sidkandan/CLIronChef</a>
+<span class="gh-stars">⭐3</span>⭐3</span>
+</div>
+<div class="gh-desc">CLI + AI Agent 控制 Typhur Dome 2 智慧烤箱與 Sync ONE 探針</div>
+<div class="gh-bottom"><span class="gh-lang">Python</span><class="gh-tag">IoT</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top">
+<a class="gh-name" href="https://github.com/huangyrcn/web-kit">huangyrcn/web-kit</a>
+<span class="gh-stars">⭐3</span>
+</div>
+<div class="gh-desc">AI Agent 技能包：搜尋 + 網頁閱讀 + 下載，單容器自託管後端</div>
+    "java"
+        <div class="gh-bottom"><span class="gh-lang">Python</span><span class="gh-tag">工具包</span></div>
+</div>
+
+<div class="gh-card">
+<div class="gh-top">
+<a class="gh-name" href="https://github.com/Sid00011/zparty">Sid00011/zparty</a>
+<span class="gh-stars">⭐3</span>
+</div>
+<div class="gh-desc">自動化滲透測試框架：30+ 弱點模組、本地 AI 漏洞引擎、Tor 匿名化</div>
+<div class="gh-bottom"><span class-gh-lang">Python</span><span class="gh-tag">資安</span></div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- Footer -->
+<div class="footer" style="section">
+</div>
+
+</div>
+</body>
+</html>
