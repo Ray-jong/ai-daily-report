@@ -6,6 +6,7 @@
 <title>AI 日報精華 2026-05-19</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
     font-family:'Inter','SF Pro Display','Noto Sans TC',-apple-system,BlinkMacSystemFont,sans-serif;
     background:linear-gradient(135deg,#f8f6f3 0%,#f0ece6 100%);
@@ -50,6 +51,21 @@ body{
 .stat-num.c3{color:#34d399}
 .stat-num.c4{color:#a78bfa}
 .stat-label{font-size:12px;color:#94a3b8;font-weight:500}
+
+.bar{
+    background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);
+    border-radius:14px;padding:12px 20px;margin-bottom:20px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    border:1px solid rgba(0,0,0,0.04);box-shadow:0 1px 3px rgba(0,0,0,0.04)
+}
+.bar-left{display:flex;align-items:center;gap:10px}
+.bar-greeting{font-size:15px;font-weight:600;color:#1a1a2e}
+.bar-time{font-size:12px;color:#64748b}
+.bar-right{display:flex;align-items:center;gap:8px}
+.bar-weather{display:flex;align-items:center;gap:6px;font-size:13px;color:#1a1a2e;background:rgba(59,130,246,0.06);padding:4px 12px;border-radius:100px}
+.bar-weather .emoji{font-size:18px}
+.bar-tip{font-size:12px;color:#64748b;background:rgba(251,191,36,0.08);padding:4px 12px;border-radius:100px}
+.section-header{scroll-margin-top:24px}
 .section{
     margin-bottom:20px;border-radius:14px;overflow:hidden;
     background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.04);
@@ -123,6 +139,20 @@ body{
 @media(min-width:641px){
     .news-grid{grid-template-columns:1fr 1fr}
 }
+
+.back-to-top{
+    position:fixed;bottom:30px;right:30px;width:44px;height:44px;
+    background:rgba(26,26,46,0.8);backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.1);border-radius:50%;
+    color:#fff;font-size:20px;cursor:pointer;display:none;
+    align-items:center;justify-content:center;transition:all 0.3s;
+    z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.15)
+}
+.back-to-top:hover{background:#16213e;transform:translateY(-3px)}
+.back-to-top.show{display:flex}
+@media(max-width:640px){
+    .back-to-top{bottom:16px;right:16px;width:36px;height:36px;font-size:16px}
+}
 </style>
 </head>
 <body>
@@ -136,16 +166,28 @@ body{
 </div>
 <div class="subtitle">全球 AI 產業脈動 · 台灣政策追蹤 · 商業投資焦點 · GitHub 熱門專案</div>
 <div class="stats-row">
-<div class="stat-card"><div class="stat-num c1">8</div><div class="stat-label">AI 應用</div></div>
-<div class="stat-card"><div class="stat-num c2">5</div><div class="stat-label">台灣政策</div></div>
-<div class="stat-card"><div class="stat-num c3">5</div><div class="stat-label">商業投資</div></div>
-<div class="stat-card"><div class="stat-num c4">5</div><div class="stat-label">GitHub 專案</div></div>
+<a class="stat-card" href="#sec-app"><div class="stat-num c1">8</div><div class="stat-label">AI 應用</div></a>
+<a class="stat-card" href="#sec-tw"><div class="stat-num c2">5</div><div class="stat-label">台灣政策</div></a>
+<a class="stat-card" href="#sec-biz"><div class="stat-num c3">5</div><div class="stat-label">商業投資</div></a>
+<a class="stat-card" href="#sec-gh"><div class="stat-num c4">5</div><div class="stat-label">GitHub 專案</div></a>
 </div>
 </div>
 </div>
 
+<!-- Greeting Bar -->
+<div class="bar" id="greetingBar">
+<div class="bar-left">
+<span class="bar-greeting" id="greetingText">☀️ 早安</span>
+<span class="bar-time" id="clockDisplay">載入中...</span>
+</div>
+<div class="bar-right">
+<span class="bar-weather" id="weatherDisplay"><span class="emoji">☁️</span> 台北 26°C</span>
+<span class="bar-tip" id="tipText">💡 點數字快速跳轉區塊</span>
+</div>
+</div>
+
 <!-- AI 應用 -->
-<div class="section section-1">
+<div class="section section-1" id="sec-app">
 <div class="section-header">🤖 AI 應用與產業<span class="badge">8 則</span></div>
 <div class="section-body"><div class="news-grid">
 
@@ -184,7 +226,7 @@ body{
 </div></div></div>
 
 <!-- 台灣政策 -->
-<div class="section section-2">
+<div class="section section-2" id="sec-tw">
 <div class="section-header">🏛️ 台灣 AI 政策<span class="badge">5 則</span></div>
 <div class="section-body"><div class="news-grid">
 
@@ -211,7 +253,7 @@ body{
 </div></div></div>
 
 <!-- 商業投資 -->
-<div class="section section-3">
+<div class="section section-3" id="sec-biz">
 <div class="section-header">💼 商業與投資<span class="badge">5 則</span></div>
 <div class="section-body"><div class="news-grid">
 
@@ -238,7 +280,7 @@ body{
 </div></div></div>
 
 <!-- GitHub -->
-<div class="section section-4">
+<div class="section section-4" id="sec-gh">
 <div class="section-header">📦 GitHub 熱門 AI 專案<span class="badge">5 個</span></div>
 <div class="section-body"><div class="news-grid">
 
@@ -262,6 +304,37 @@ body{
 <div class="footer">
 🔍 有興趣的主題告訴我，幫你深入追蹤 · <a href="https://Ray-jong.github.io/ai-daily-report/ai-report-2026-05-19.html" target="_blank">47 則完整版</a>
 </div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到頂部">↑</button>
+
+<script>
+// Greeting
+(function(){
+var h=new Date().getHours();
+var g=document.getElementById('greetingText');
+var e='☀️';
+if(h<12){g.textContent='☀️ 早安';e='☀️'}
+else if(h<18){g.textContent='🌤️ 午安';e='🌤️'}
+else{g.textContent='🌙 晚安';e='🌙'}
+// Clock
+function tick(){
+var n=new Date();
+document.getElementById('clockDisplay').textContent=n.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});
+}
+tick();setInterval(tick,10000);
+// Back to top
+window.addEventListener('scroll',function(){
+document.getElementById('backToTop').classList.toggle('show',window.scrollY>300);
+});
+// Weather (static for Taipei)
+var w=document.getElementById('weatherDisplay');
+w.innerHTML='<span class="emoji">☁️</span> 台北 26°C';
+// Tip rotation
+var tips=['💡 點數字快速跳轉區塊','🔍 點標題閱讀原文','📋 滑鼠移過卡片可複製連結','⬆️ 往下滑出現回到頂部按鈕'];
+var ti=0;
+setInterval(function(){ti=(ti+1)%tips.length;document.getElementById('tipText').textContent=tips[ti];},8000);
+})();
+</script>
 
 </div>
 </body>
