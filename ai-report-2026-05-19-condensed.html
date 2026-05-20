@@ -15,18 +15,15 @@ body{
 .container{max-width:1000px;margin:0 auto}
 .header{
     background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
-    border-radius:20px;padding:36px 32px 28px;margin-bottom:28px;
-    position:relative;overflow:hidden
+    border-radius:20px;padding:36px 32px 28px;margin-bottom:16px;position:relative;overflow:hidden
 }
 .header::before{
     content:'';position:absolute;top:-60%;right:-20%;width:300px;height:300px;
-    background:radial-gradient(circle,rgba(83,127,231,0.15) 0%,transparent 70%);
-    border-radius:50%
+    background:radial-gradient(circle,rgba(83,127,231,0.15) 0%,transparent 70%);border-radius:50%
 }
 .header::after{
     content:'';position:absolute;bottom:-40%;left:-10%;width:250px;height:250px;
-    background:radial-gradient(circle,rgba(255,107,107,0.1) 0%,transparent 70%);
-    border-radius:50%
+    background:radial-gradient(circle,rgba(255,107,107,0.1) 0%,transparent 70%);border-radius:50%
 }
 .header-content{position:relative;z-index:1}
 .header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:10px}
@@ -42,16 +39,13 @@ body{
 .stat-card{
     background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);
     border:1px solid rgba(255,255,255,0.08);border-radius:12px;
-    padding:14px 10px;text-align:center;transition:all 0.2s
+    padding:14px 10px;text-align:center;transition:all 0.2s;cursor:pointer;display:block;text-decoration:none
 }
-.stat-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-2px)}
+.stat-card:hover{background:rgba(255,255,255,0.15);transform:translateY(-2px)}
+.stat-card.active{box-shadow:0 0 0 2px #60a5fa;border-color:#60a5fa}
 .stat-num{font-size:26px;font-weight:800;line-height:1.2;margin-bottom:2px}
-.stat-num.c1{color:#60a5fa}
-.stat-num.c2{color:#fbbf24}
-.stat-num.c3{color:#34d399}
-.stat-num.c4{color:#a78bfa}
+.stat-num.c1{color:#60a5fa}.stat-num.c2{color:#fbbf24}.stat-num.c3{color:#34d399}.stat-num.c4{color:#a78bfa}
 .stat-label{font-size:12px;color:#94a3b8;font-weight:500}
-
 .bar{
     background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);
     border-radius:14px;padding:12px 20px;margin-bottom:20px;
@@ -65,15 +59,29 @@ body{
 .bar-weather{display:flex;align-items:center;gap:6px;font-size:13px;color:#1a1a2e;background:rgba(59,130,246,0.06);padding:4px 12px;border-radius:100px}
 .bar-weather .emoji{font-size:18px}
 .bar-tip{font-size:12px;color:#64748b;background:rgba(251,191,36,0.08);padding:4px 12px;border-radius:100px}
-.section-header{scroll-margin-top:24px}
+.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.view-select{font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid #e0e0e0;background:#fff;color:#1a1a2e;cursor:pointer;outline:none}
+.view-select:focus{border-color:#3b82f6}
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap}
+.filter-btn{
+    font-size:11px;padding:4px 12px;border-radius:100px;border:none;cursor:pointer;
+    transition:all 0.2s;font-weight:500
+}
+.filter-btn.active{box-shadow:0 0 0 2px}
+.filter-btn.f1{background:#dbeafe;color:#1e40af}.filter-btn.f1.active{box-shadow:0 0 0 2px #3b82f6}
+.filter-btn.f2{background:#fef3c7;color:#92400e}.filter-btn.f2.active{box-shadow:0 0 0 2px #f59e0b}
+.filter-btn.f3{background:#d1fae5;color:#065f46}.filter-btn.f3.active{box-shadow:0 0 0 2px #10b981}
+.filter-btn.f4{background:#ede9fe;color:#5b21b6}.filter-btn.f4.active{box-shadow:0 0 0 2px #8b5cf6}
+.filter-btn.f0{background:#f1f5f9;color:#64748b}.filter-btn.f0.active{box-shadow:0 0 0 2px #64748b}
 .section{
     margin-bottom:20px;border-radius:14px;overflow:hidden;
-    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.04);
-    border:1px solid rgba(0,0,0,0.04)
+    background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.04);
+    transition:opacity 0.3s,transform 0.3s
 }
+.section.hidden{opacity:0.15;transform:scale(0.97);pointer-events:none}
 .section-header{
-    display:flex;align-items:center;gap:8px;padding:12px 20px;
-    font-size:15px;font-weight:600
+    display:flex;align-items:center;gap:8px;padding:14px 22px;
+    font-size:17px;font-weight:600;scroll-margin-top:24px
 }
 .section-header .badge{
     margin-left:auto;font-size:11px;padding:2px 12px;border-radius:100px;font-weight:500
@@ -90,14 +98,14 @@ body{
 .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .news-card{
     background:#fafafa;border:1px solid #f0f0f0;border-radius:10px;
-    padding:12px 14px;transition:all 0.2s;cursor:default
+    padding:12px 14px 10px;transition:all 0.2s;cursor:default;position:relative
 }
 .news-card:hover{
     background:#fff;border-color:#e0e0e0;
     box-shadow:0 4px 16px rgba(0,0,0,0.06);transform:translateY(-1px)
 }
 .news-card .num{font-size:11px;color:#bbb;margin-bottom:3px;font-weight:600}
-.news-card .title{font-size:15px;font-weight:500;line-height:1.5;margin-bottom:8px}
+.news-card .title{font-size:15px;font-weight:500;line-height:1.5;margin-bottom:6px}
 .news-card .title a{color:#1a1a2e;text-decoration:none}
 .news-card .title a:hover{color:#2563eb}
 .news-card .meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
@@ -109,9 +117,20 @@ body{
 .section-3 .news-card .source{background:#d1fae5;color:#065f46}
 .section-4 .news-card .source{background:#ede9fe;color:#5b21b6}
 .news-card .date{font-size:11px;color:#aaa}
+.news-card .card-actions{
+    position:absolute;top:8px;right:8px;display:flex;gap:2px;opacity:0;transition:opacity 0.2s
+}
+.news-card:hover .card-actions{opacity:1}
+.news-card .card-actions button{
+    width:22px;height:22px;border:none;border-radius:4px;cursor:pointer;
+    font-size:11px;background:transparent;color:#bbb;transition:all 0.15s;display:flex;align-items:center;justify-content:center
+}
+.news-card .card-actions button:hover{background:rgba(59,130,246,0.08);color:#3b82f6}
+.news-card .card-actions .starred{color:#f59e0b}
+.news-card .card-actions .starred:hover{color:#d97706}
 .gh-card{
     background:#fafafa;border:1px solid #f0f0f0;border-radius:10px;
-    padding:12px 14px;transition:all 0.2s
+    padding:12px 14px;transition:all 0.2s;position:relative
 }
 .gh-card:hover{
     background:#fff;border-color:#e0e0e0;
@@ -121,25 +140,25 @@ body{
 .gh-card .repo-name{font-size:14px;font-weight:600;color:#5b21b6;text-decoration:none}
 .gh-card .repo-name:hover{text-decoration:underline}
 .gh-card .stars{font-size:12px;color:#d97706;font-weight:600}
-.gh-card .desc{font-size:12px;color:#64748b;line-height:1.4;margin-bottom:6px}
+.gh-card .desc{font-size:12px;color:#64748b;line-height:1.4;margin-bottom:6px;padding-right:20px}
 .gh-card .tags{display:flex;gap:4px;flex-wrap:wrap}
 .gh-card .tag{font-size:10px;padding:2px 10px;border-radius:100px;background:#ede9fe;color:#5b21b6}
-.gh-card .lang{font-size:10px;padding:2px 10px;border-radius:100px;background:#f1f5f9;color:#64748b}
+.gh-card .gh-actions{
+    position:absolute;top:8px;right:8px;display:flex;gap:2px;opacity:0;transition:opacity 0.2s
+}
+.gh-card:hover .gh-actions{opacity:1}
+.gh-card .gh-actions button{
+    width:22px;height:22px;border:none;border-radius:4px;cursor:pointer;
+    font-size:10px;background:transparent;color:#bbb;transition:all 0.15s;display:flex;align-items:center;justify-content:center
+}
+.gh-card .gh-actions button:hover{background:rgba(139,92,246,0.08);color:#5b21b6}
 .footer{
     text-align:center;padding:20px;color:#94a3b8;font-size:13px
 }
 .footer a{color:#64748b;text-decoration:none}
 .footer a:hover{text-decoration:underline}
-@media(max-width:640px){
-    .stats-row{grid-template-columns:repeat(2,1fr)}
-    .news-grid{grid-template-columns:1fr}
-    .header{padding:24px 18px 20px}
-    .header h1{font-size:22px}
-}
-@media(min-width:641px){
-    .news-grid{grid-template-columns:1fr 1fr}
-}
 
+/* Back to top */
 .back-to-top{
     position:fixed;bottom:30px;right:30px;width:44px;height:44px;
     background:rgba(26,26,46,0.8);backdrop-filter:blur(10px);
@@ -150,9 +169,64 @@ body{
 }
 .back-to-top:hover{background:#16213e;transform:translateY(-3px)}
 .back-to-top.show{display:flex}
+
+/* Modal */
+.modal-overlay{
+    display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:200;
+    align-items:center;justify-content:center
+}
+.modal-overlay.show{display:flex}
+.modal{
+    background:#fff;border-radius:16px;max-width:560px;width:90%;max-height:80vh;overflow-y:auto;
+    padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative
+}
+.modal-close{
+    position:absolute;top:12px;right:12px;width:28px;height:28px;border:none;
+    border-radius:50%;background:#f1f5f9;color:#64748b;cursor:pointer;font-size:14px;
+    display:flex;align-items:center;justify-content:center
+}
+.modal-close:hover{background:#e2e8f0}
+.modal h2{font-size:16px;font-weight:600;margin-bottom:6px;padding-right:30px}
+.modal .modal-link{font-size:12px;color:#3b82f6;word-break:break-all;margin-bottom:12px}
+.modal .modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.modal .modal-actions button{
+    padding:8px 16px;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s
+}
+.modal .modal-actions .btn-primary{background:#1a1a2e;color:#fff}
+.modal .modal-actions .btn-primary:hover{background:#16213e}
+.modal .modal-actions .btn-secondary{background:#f1f5f9;color:#1a1a2e}
+.modal .modal-actions .btn-secondary:hover{background:#e2e8f0}
+
+/* Toast */
+.toast{
+    position:fixed;bottom:90px;right:30px;background:#1a1a2e;color:#fff;
+    padding:8px 16px;border-radius:10px;font-size:12px;z-index:300;
+    box-shadow:0 2px 12px rgba(0,0,0,0.2);opacity:0;transition:opacity 0.3s;pointer-events:none
+}
+.toast.show{opacity:1}
+
+/* Bookmarks bar */
+.bookmark-bar{
+    display:none;margin-bottom:16px;padding:10px 16px;background:#fffbeb;
+    border-radius:10px;border:1px solid #fde68a;font-size:13px;color:#92400e;
+    align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px
+}
+.bookmark-bar.show{display:flex}
+.bookmark-bar .bmb-count{font-weight:600}
+.bookmark-bar .bmb-clear{
+    font-size:11px;padding:3px 10px;border-radius:100px;border:none;
+    background:#fde68a;color:#92400e;cursor:pointer;font-weight:500
+}
+
 @media(max-width:640px){
+    .stats-row{grid-template-columns:repeat(2,1fr)}
+    .news-grid{grid-template-columns:1fr}
+    .header{padding:24px 18px 20px}
+    .header h1{font-size:22px}
     .back-to-top{bottom:16px;right:16px;width:36px;height:36px;font-size:16px}
 }
+@media(min-width:641px){.news-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -166,174 +240,361 @@ body{
 </div>
 <div class="subtitle">全球 AI 產業脈動 · 台灣政策追蹤 · 商業投資焦點 · GitHub 熱門專案</div>
 <div class="stats-row">
-<a class="stat-card" href="#sec-app"><div class="stat-num c1">8</div><div class="stat-label">AI 應用</div></a>
-<a class="stat-card" href="#sec-tw"><div class="stat-num c2">5</div><div class="stat-label">台灣政策</div></a>
-<a class="stat-card" href="#sec-biz"><div class="stat-num c3">5</div><div class="stat-label">商業投資</div></a>
-<a class="stat-card" href="#sec-gh"><div class="stat-num c4">5</div><div class="stat-label">GitHub 專案</div></a>
+<div class="stat-card f1" data-filter="1" onclick="toggleFilter(1)"><div class="stat-num c1">8</div><div class="stat-label">AI 應用</div></div>
+<div class="stat-card f2" data-filter="2" onclick="toggleFilter(2)"><div class="stat-num c2">5</div><div class="stat-label">台灣政策</div></div>
+<div class="stat-card f3" data-filter="3" onclick="toggleFilter(3)"><div class="stat-num c3">5</div><div class="stat-label">商業投資</div></div>
+<div class="stat-card f4" data-filter="4" onclick="toggleFilter(4)"><div class="stat-num c4">5</div><div class="stat-label">GitHub</div></div>
 </div>
 </div>
 </div>
 
-<!-- Greeting Bar -->
-<div class="bar" id="greetingBar">
+<div class="bar">
 <div class="bar-left">
 <span class="bar-greeting" id="greetingText">☀️ 早安</span>
-<span class="bar-time" id="clockDisplay">載入中...</span>
+<span class="bar-time" id="clockDisplay"></span>
 </div>
 <div class="bar-right">
-<span class="bar-weather" id="weatherDisplay"><span class="emoji">☁️</span> 台北 26°C</span>
-<span class="bar-tip" id="tipText">💡 點數字快速跳轉區塊</span>
+<span class="bar-weather" id="weatherDisplay"><span class="emoji">🌤️</span> 高雄 28°C</span>
+<span class="bar-tip" id="tipText">💡 點數字篩選新聞區塊</span>
 </div>
 </div>
 
-<!-- AI 應用 -->
+<!-- Toolbar -->
+<div class="toolbar">
+<div class="filter-bar">
+<button class="filter-btn f0 active" onclick="setView(0)">📋 全部顯示</button>
+<button class="filter-btn f1" onclick="setView(1)">🤖 AI 應用</button>
+<button class="filter-btn f2" onclick="setView(2)">🏛️ 台灣政策</button>
+<button class="filter-btn f3" onclick="setView(3)">💼 商業投資</button>
+<button class="filter-btn f4" onclick="setView(4)">📦 GitHub</button>
+<button class="filter-btn f0" onclick="showBookmarks()" id="bookmarkFilterBtn" style="display:none">⭐ 書籤</button>
+</div>
+<select class="view-select" id="viewSelect" onchange="changePerspective(this.value)">
+<option value="">🎯 一般觀點</option>
+<option value="influencer">📱 網紅行銷視角</option>
+<option value="logistics">📦 物流自動化視角</option>
+<option value="ecommerce">🛒 電商營運視角</option>
+<option value="investor">💰 投資人視角</option>
+</select>
+</div>
+
+<!-- Bookmark bar -->
+<div class="bookmark-bar" id="bookmarkBar">
+<span>⭐ 已收藏 <span class="bmb-count" id="bmbCount">0</span> 則新聞</span>
+<button class="bmb-clear" onclick="clearBookmarks()">清除全部</button>
+</div>
+
+<!-- Section 1: AI 應用 -->
 <div class="section section-1" id="sec-app">
 <div class="section-header">🤖 AI 應用與產業<span class="badge">8 則</span></div>
 <div class="section-body"><div class="news-grid">
 
-<div class="news-card"><div class="num">001</div>
+<div class="news-card" data-id="a1"><div class="card-actions"><button onclick="toggleStar('a1',this)" title="收藏">☆</button><button onclick="deepDive('Meta 調配 7,000 名員工全力投入 AI','https://news.google.com/rss/articles/CBMiiwFBVV95cUxORnVpMXh5RjM1NzVpTHA1NHFMbzhheVVqUElRUXEyVGZOV0lFZWRhdmdTelpMWDVLazJlaXlkd3ZVZHdTZ2VvR2oxZ251cng5aEFKdDh6NEJTeUlrQTJRa0xwTXJ0bFk0TTNpZy1zeTFkMDhocV9mZW5sNDNrRTJ6Rzhld3lySVBkZVJV?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">001</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxORnVpMXh5RjM1NzVpTHA1NHFMbzhheVVqUElRUXEyVGZOV0lFZWRhdmdTelpMWDVLazJlaXlkd3ZVZHdTZ2VvR2oxZ251cng5aEFKdDh6NEJTeUlrQTJRa0xwTXJ0bFk0TTNpZy1zeTFkMDhocV9mZW5sNDNrRTJ6Rzhld3lySVBkZVJV?oc=5" target="_blank">Meta 調配 7,000 名員工全力投入 AI</a></div>
 <div class="meta"><span class="source">NYT</span><span class="date">5/19</span></div></div>
 
-<div class="news-card"><div class="num">002</div>
+<div class="news-card" data-id="a2"><div class="card-actions"><button onclick="toggleStar('a2',this)" title="收藏">☆</button><button onclick="deepDive('Google I/O 2026：Gemini AI 模型與 Android 17 亮相','https://news.google.com/rss/articles/CBMitAFBVV95cUxOWG80a0hmV3czalNkU09nb2Y4MVR6bjRYcWpLeS16Mnl1VVV4YTBPdXZyNVhUb042LVJMTW9VS2JPekJoZWhYeFdCeWtVZlAzUEUxSk1ZTUFrbThNTVljSHZKNzBVRW04cW40UGxhak1xRHRPRU1qMDBhcTdrYVd6NDR2dHk5TnBzUGg5bjAtZzdLSzdjUkpEY0FnZGs0cGNSQ2EzYmJJY1NtTVBUT1c0TERocFk?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">002</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxOWG80a0hmV3czalNkU09nb2Y4MVR6bjRYcWpLeS16Mnl1VVV4YTBPdXZyNVhUb042LVJMTW9VS2JPekJoZWhYeFdCeWtVZlAzUEUxSk1ZTUFrbThNTVljSHZKNzBVRW04cW40UGxhak1xRHRPRU1qMDBhcTdrYVd6NDR2dHk5TnBzUGg5bjAtZzdLSzdjUkpEY0FnZGs0cGNSQ2EzYmJJY1NtTVBUT1c0TERocFk?oc=5" target="_blank">Google I/O 2026：Gemini AI 模型與 Android 17 亮相</a></div>
 <div class="meta"><span class="source">Deccan Herald</span><span class="date">5/19</span></div></div>
 
-<div class="news-card"><div class="num">003</div>
+<div class="news-card" data-id="a3"><div class="card-actions"><button onclick="toggleStar('a3',this)" title="收藏">☆</button><button onclick="deepDive('OpenAI 勝訴！陪審團判決擊敗 Elon Musk 訴訟','https://news.google.com/rss/articles/CBMilwFBVV95cUxQSkZpcWhiU2hPd09oOG1uVEFrNE9NS2NFa0YxSzR6dUc2YWhKZXhsNXprZW5GX1FJTTI0eDV1X0dPelphZEVPMEZXRGlTaTNVRlJrY29VYl9IZlh6RTR5aWQybm1uT1RuU1luQkdkOGxWbjhTOEZDVUFXa3dWLTVyTUpTY0Q5em5wcHl4LUFodzFKMkNuWl9z?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">003</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQSkZpcWhiU2hPd09oOG1uVEFrNE9NS2NFa0YxSzR6dUc2YWhKZXhsNXprZW5GX1FJTTI0eDV1X0dPelphZEVPMEZXRGlTaTNVRlJrY29VYl9IZlh6RTR5aWQybm1uT1RuU1luQkdkOGxWbjhTOEZDVUFXa3dWLTVyTUpTY0Q5em5wcHl4LUFodzFKMkNuWl9z?oc=5" target="_blank">OpenAI 勝訴！陪審團判決擊敗 Elon Musk 訴訟</a></div>
 <div class="meta"><span class="source">The Guardian</span><span class="date">5/18</span></div></div>
 
-<div class="news-card"><div class="num">004</div>
+<div class="news-card" data-id="a4"><div class="card-actions"><button onclick="toggleStar('a4',this)" title="收藏">☆</button><button onclick="deepDive('開放式 AI 模型為何逐漸追上大型語言模型','https://news.google.com/rss/articles/CBMinAFBVV95cUxQSXZMVnFRQTgxYXhmcXhYeFRIUWdyU1VmalBmblFPdEZXb0E5bTU2bUFMelBISE1uQTRzeXpob285ajdKRTJXNjZRN3hlakFIV2piSXJHYXJQU1h3VnkxekNzY1h0Zi1iUDJ3a2hEYlpUcG0wOWh3QzVJOWluRWFSQVBiQURUUHlmMHZrOFNCY3Vyd1ZLbTMwMlBRZ3I?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">004</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxQSXZMVnFRQTgxYXhmcXhYeFRIUWdyU1VmalBmblFPdEZXb0E5bTU2bUFMelBISE1uQTRzeXpob285ajdKRTJXNjZRN3hlakFIV2piSXJHYXJQU1h3VnkxekNzY1h0Zi1iUDJ3a2hEYlpUcG0wOWh3QzVJOWluRWFSQVBiQURUUHlmMHZrOFNCY3Vyd1ZLbTMwMlBRZ3I?oc=5" target="_blank">開放式 AI 模型為何逐漸追上大型語言模型</a></div>
 <div class="meta"><span class="source">Computerworld</span><span class="date">5/19</span></div></div>
 
-<div class="news-card"><div class="num">005</div>
+<div class="news-card" data-id="a5"><div class="card-actions"><button onclick="toggleStar('a5',this)" title="收藏">☆</button><button onclick="deepDive('AI 幻覺解決了嗎？2026 年聊天機器人真相','https://news.google.com/rss/articles/CBMiwAFBVV95cUxOOTJEWklvU25pTXl6OEFBb2tsbzkyTU5NYnRRTTd4U1hoc25QRzVXRkR0WTFqeWVqX24wZkxPMXd3aFJBcjJxekk1bkt5dmJpdjFmemJfYnBSc004RW1JOGRFcUFPRkprQnJrTktUSW5iV1NfSFVsVGVHbC1COHFLdmE2WTAxWlZwOWRMcXh0enV5YjZ3TklmQVpLMUd1ckN1NnRuekJTM3ZWWjliV3BPRFBHUHROd0xVTVZlM2RZQ0M?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">005</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxOOTJEWklvU25pTXl6OEFBb2tsbzkyTU5NYnRRTTd4U1hoc25QRzVXRkR0WTFqeWVqX24wZkxPMXd3aFJBcjJxekk1bkt5dmJpdjFmemJfYnBSc004RW1JOGRFcUFPRkprQnJrTktUSW5iV1NfSFVsVGVHbC1COHFLdmE2WTAxWlZwOWRMcXh0enV5YjZ3TklmQVpLMUd1ckN1NnRuekJTM3ZWWjliV3BPRFBHUHROd0xVTVZlM2RZQ0M?oc=5" target="_blank">AI 幻覺解決了嗎？2026 年聊天機器人真相</a></div>
 <div class="meta"><span class="source">Tech Times</span><span class="date">5/19</span></div></div>
 
-<div class="news-card"><div class="num">006</div>
+<div class="news-card" data-id="a6"><div class="card-actions"><button onclick="toggleStar('a6',this)" title="收藏">☆</button><button onclick="deepDive('Dell 發表桌邊代理式 AI 主機','https://news.google.com/rss/articles/CBMivgFBVV95cUxNWW1ucU5XMzJFTkI5OVgtSUp1bEZLbW12Q0JuMFBlRkZodlQ5dDRlTW1vcW5yM0RtM2hJUDQyTWhIX0tMZGJTRzJGQndLdnlJaGVRTXppdHhrc1hwM0p2ajYySUtWMTJlTUVzaGVwd1BLMjUxNm9VSXQ1c01rdnlyX2FyX21wR1dOa1NiV3lxd25xZFM3aDBPQWotR0twZUUwQjBiN1dGelprZGYza0k4QlZvbUhfTkNSUmRXaUpB?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">006</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxNWW1ucU5XMzJFTkI5OVgtSUp1bEZLbW12Q0JuMFBlRkZodlQ5dDRlTW1vcW5yM0RtM2hJUDQyTWhIX0tMZGJTRzJGQndLdnlJaGVRTXppdHhrc1hwM0p2ajYySUtWMTJlTUVzaGVwd1BLMjUxNm9VSXQ1c01rdnlyX2FyX21wR1dOa1NiV3lxd25xZFM3aDBPQWotR0twZUUwQjBiN1dGelprZGYza0k4QlZvbUhfTkNSUmRXaUpB?oc=5" target="_blank">Dell 發表桌邊代理式 AI 主機</a></div>
 <div class="meta"><span class="source">IT Pro</span><span class="date">5/18</span></div></div>
 
-<div class="news-card"><div class="num">007</div>
+<div class="news-card" data-id="a7"><div class="card-actions"><button onclick="toggleStar('a7',this)" title="收藏">☆</button><button onclick="deepDive('新型圖片注入攻擊鎖定多模態 AI 模型','https://news.google.com/rss/articles/CBMitgFBVV95cUxOZEJ2Zk80dVNTUlNaaTNta3NPTDdkYk9IUEJmeHJWVU9xX3ktWXpwVDRHcXpDeDBXd0JPMDg5amRuVDdzMkpjTWZibTZNdkJDVnVmZ2tzTWM3OXoyZWlHaXhFQW5EcUFxUWZxajh4TkV3MnVJYUlISjlUUEdScjhmNlZSeHVnaTBWdm1fZmlMV1d1aXUzWWJCNFNxMHZ0cmpVdlBsZnRCTDFBNjFKSlI5QUI4cXkzQQ?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">007</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxOZEJ2Zk80dVNTUlNaaTNta3NPTDdkYk9IUEJmeHJWVU9xX3ktWXpwVDRHcXpDeDBXd0JPMDg5amRuVDdzMkpjTWZibTZNdkJDVnVmZ2tzTWM3OXoyZWlHaXhFQW5EcUFxUWZxajh4TkV3MnVJYUlISjlUUEdScjhmNlZSeHVnaTBWdm1fZmlMV1d1aXUzWWJCNFNxMHZ0cmpVdlBsZnRCTDFBNjFKSlI5QUI4cXkzQQ?oc=5" target="_blank">新型圖片注入攻擊鎖定多模態 AI 模型</a></div>
 <div class="meta"><span class="source">csoonline</span><span class="date">5/18</span></div></div>
 
-<div class="news-card"><div class="num">008</div>
+<div class="news-card" data-id="a8"><div class="card-actions"><button onclick="toggleStar('a8',this)" title="收藏">☆</button><button onclick="deepDive('AI 反彈浪潮成為真實商業風險','https://news.google.com/rss/articles/CBMib0FVX3lxTE1xX0dEaUt2S19sM1c2d0dGLVVReldLbHBsdE1KdWpRU0lWRWozOUJPZnRwaXdQemdheXdJX0RIcjJZb0wxM2RTeDV4Tlg5NlNuU1RVRUxHR1JsTENtWXlsYUREb212Y3FqRVhBTzlTaw?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">008</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMib0FVX3lxTE1xX0dEaUt2S19sM1c2d0dGLVVReldLbHBsdE1KdWpRU0lWRWozOUJPZnRwaXdQemdheXdJX0RIcjJZb0wxM2RTeDV4Tlg5NlNuU1RVRUxHR1JsTENtWXlsYUREb212Y3FqRVhBTzlTaw?oc=5" target="_blank">AI 反彈浪潮成為真實商業風險</a></div>
 <div class="meta"><span class="source">Axios</span><span class="date">5/17</span></div></div>
 
 </div></div></div>
 
-<!-- 台灣政策 -->
+<!-- Section 2: 台灣政策 -->
 <div class="section section-2" id="sec-tw">
 <div class="section-header">🏛️ 台灣 AI 政策<span class="badge">5 則</span></div>
 <div class="section-body"><div class="news-grid">
 
-<div class="news-card"><div class="num">001</div>
+<div class="news-card" data-id="tw1"><div class="card-actions"><button onclick="toggleStar('tw1',this)" title="收藏">☆</button><button onclick="deepDive('數發部次長：不走歐盟分級路線，台灣 AI 風險治理框架曝光','https://news.google.com/rss/articles/CBMigAFBVV95cUxQUUY3dmtDakZxUzVjZXI1RDQ4Y2pheWE3NnhVRTZaU3dnMHVQLXNSRWVkd2thbU50aE53RS15LVBPWWV5RzZoakR3VG1NTXpramN1TmJIRi02dGZWWktLNlpOSldDb1Rna0d6cTVuSWI3Y1BqVmZLdlM1ejlTUzBDYQ?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">001</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQUUY3dmtDakZxUzVjZXI1RDQ4Y2pheWE3NnhVRTZaU3dnMHVQLXNSRWVkd2thbU50aE53RS15LVBPWWV5RzZoakR3VG1NTXpramN1TmJIRi02dGZWWktLNlpOSldDb1Rna0d6cTVuSWI3Y1BqVmZLdlM1ejlTUzBDYQ?oc=5" target="_blank">數發部次長：不走歐盟分級路線，台灣 AI 風險治理框架曝光</a></div>
 <div class="meta"><span class="source">未來城市＠天下</span></div></div>
 
-<div class="news-card"><div class="num">002</div>
+<div class="news-card" data-id="tw2"><div class="card-actions"><button onclick="toggleStar('tw2',this)" title="收藏">☆</button><button onclick="deepDive('數發部揭露 AI 風險分類框架草案：三大類 18 小類','https://news.google.com/rss/articles/CBMiTkFVX3lxTE5sRFpKSVNRd2xNX29ZYnJMM25YZDJqR21vOTBEd3BvaUdlUW5BQXVQWXdQeEJKMGlFQWNmSktzSFczOXFaLWhIcURaZHEwZw?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">002</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE5sRFpKSVNRd2xNX29ZYnJMM25YZDJqR21vOTBEd3BvaUdlUW5BQXVQWXdQeEJKMGlFQWNmSktzSFczOXFaLWhIcURaZHEwZw?oc=5" target="_blank">數發部揭露 AI 風險分類框架草案：三大類 18 小類</a></div>
 <div class="meta"><span class="source">iThome</span></div></div>
 
-<div class="news-card"><div class="num">003</div>
+<div class="news-card" data-id="tw3"><div class="card-actions"><button onclick="toggleStar('tw3',this)" title="收藏">☆</button><button onclick="deepDive('AI 基本法三讀通過，政院將設國家 AI 戰略委員會','https://news.google.com/rss/articles/CBMiTkFVX3lxTE1IcWJsUG1HSThYRjdULURJRGk4N0FOeENZeUlLdXpyb3lnRVJ6d3lfTEh5NUE0bURlN1J2UWtweHg0ejMyZU1XMi0tTnlXZw?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">003</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMiTkFVX3lxTE1IcWJsUG1HSThYRjdULURJRGk4N0FOeENZeUlLdXpyb3lnRVJ6d3lfTEh5NUE0bURlN1J2UWtweHg0ejMyZU1XMi0tTnlXZw?oc=5" target="_blank">AI 基本法三讀通過，政院將設國家 AI 戰略委員會</a></div>
 <div class="meta"><span class="source">iThome</span></div></div>
 
-<div class="news-card"><div class="num">004</div>
+<div class="news-card" data-id="tw4"><div class="card-actions"><button onclick="toggleStar('tw4',this)" title="收藏">☆</button><button onclick="deepDive('AI 基本法實行後：成立國家 AI 戰略委員會之政策建議','https://news.google.com/rss/articles/CBMiWkFVX3lxTE4zLWNIRk5ZVXo5bEU3MGRBSHpzbjV0Z25kQTFRLUlmZ3FzNTQxbFZXYWdTRE81ZlhzSmFSc3Q5R09pZXpOYUZZZGxOUjZTSVdtd2JLZXFaRGxBQQ?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">004</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE4zLWNIRk5ZVXo5bEU3MGRBSHpzbjV0Z25kQTFRLUlmZ3FzNTQxbFZXYWdTRE81ZlhzSmFSc3Q5R09pZXpOYUZZZGxOUjZTSVdtd2JLZXFaRGxBQQ?oc=5" target="_blank">AI 基本法實行後：成立國家 AI 戰略委員會之政策建議</a></div>
 <div class="meta"><span class="source">信傳媒</span></div></div>
 
-<div class="news-card"><div class="num">005</div>
+<div class="news-card" data-id="tw5"><div class="card-actions"><button onclick="toggleStar('tw5',this)" title="收藏">☆</button><button onclick="deepDive('台灣立法推動 AI 上路：百工百業智慧轉型起跑','https://news.google.com/rss/articles/CBMiZEFVX3lxTFBhc1hLZEhSWVNreFlNOXowdURrb1hTdGtEdGh0cVlpcDFvQTRqWGphZ2ZDbkMzZi1LMlpjaDJGU0dBdHpkSmlWTV8xOWpISnU4M052eFJpVDhHakVqcjd6UTJBSjc?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">005</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTFBhc1hLZEhSWVNreFlNOXowdURrb1hTdGtEdGh0cVlpcDFvQTRqWGphZ2ZDbkMzZi1LMlpjaDJGU0dBdHpkSmlWTV8xOWpISnU4M052eFJpVDhHakVqcjd6UTJBSjc?oc=5" target="_blank">台灣立法推動 AI 上路：百工百業智慧轉型起跑</a></div>
 <div class="meta"><span class="source">中央社 CNA</span></div></div>
 
 </div></div></div>
 
-<!-- 商業投資 -->
+<!-- Section 3: 商業投資 -->
 <div class="section section-3" id="sec-biz">
 <div class="section-header">💼 商業與投資<span class="badge">5 則</span></div>
 <div class="section-body"><div class="news-grid">
 
-<div class="news-card"><div class="num">001</div>
+<div class="news-card" data-id="b1"><div class="card-actions"><button onclick="toggleStar('b1',this)" title="收藏">☆</button><button onclick="deepDive('Q1 創投募資破紀錄：AI 熱潮推動新創投資達 3,000 億美元','https://news.google.com/rss/articles/CBMihAFBVV95cUxORTBNMEJaeUpqNXpYWnNEYjk1eXFpOU9aQVdfS2JvSXB0bElUN1VYMGM1UTZ6REo5VzZjcHBPODRFcmZqQkIwX1FpWXdsbVNaako0N1k2ZjBobzctanU4TWdpZW8tUURmMTBwMWM5VktrWVlHSk8zMW16RXh2anhRS282VVY?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">001</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxORTBNMEJaeUpqNXpYWnNEYjk1eXFpOU9aQVdfS2JvSXB0bElUN1VYMGM1UTZ6REo5VzZjcHBPODRFcmZqQkIwX1FpWXdsbVNaako0N1k2ZjBobzctanU4TWdpZW8tUURmMTBwMWM5VktrWVlHSk8zMW16RXh2anhRS282VVY?oc=5" target="_blank">Q1 創投募資破紀錄：AI 熱潮推動新創投資達 3,000 億美元</a></div>
 <div class="meta"><span class="source">Crunchbase News</span></div></div>
 
-<div class="news-card"><div class="num">002</div>
+<div class="news-card" data-id="b2"><div class="card-actions"><button onclick="toggleStar('b2',this)" title="收藏">☆</button><button onclick="deepDive('Morgan Stanley 2026 AI 市場趨勢報告','https://news.google.com/rss/articles/CBMihgFBVV95cUxPYVVkMUg5TTVySTJlUFJmX041MlVhYmpweFZJWkZBcGh2VGxSc09WYmtiN0Fvcy1kbkZveGlYeGVQd1phVko0eHFNdnFCR09PZThsSmhOU1pmQTlPd3g1MmkxaTIzMzFhTmh4aFFXM1pIOTNGellydnpkc3RKWnViM2Z6dkxUUQ?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">002</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxPYVVkMUg5TTVySTJlUFJmX041MlVhYmpweFZJWkZBcGh2VGxSc09WYmtiN0Fvcy1kbkZveGlYeGVQd1phVko0eHFNdnFCR09PZThsSmhOU1pmQTlPd3g1MmkxaTIzMzFhTmh4aFFXM1pIOTNGellydnpkc3RKWnViM2Z6dkxUUQ?oc=5" target="_blank">Morgan Stanley 2026 AI 市場趨勢報告</a></div>
 <div class="meta"><span class="source">Morgan Stanley</span></div></div>
 
-<div class="news-card"><div class="num">003</div>
+<div class="news-card" data-id="b3"><div class="card-actions"><button onclick="toggleStar('b3',this)" title="收藏">☆</button><button onclick="deepDive('科技公司大舉發債籌資 AI 與雲端擴張','https://news.google.com/rss/articles/CBMitAFBVV95cUxOWGhoV2p0ejNjMkltQ3BEaEZaUXV6SGpUUVd6akVEck5HMUpxWmhRM2lid3UtRmdCOHItS1k0TFlzdEd6X3c4WDZTbUxfa284N3k3TEMzWmVHdE1fMjRWTjh0N3NnYVBHVWZSc1ZRUkVhZnBvaXNSS3VNSnQ3MDlsTDBXbC04LXFDZnZyVWJIMUk5SmRvdkFsMGNaTnBjUktkajZVX3lkYnlHcFVDN05ZaEp6U2Q?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">003</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxOWGhoV2p0ejNjMkltQ3BEaEZaUXV6SGpUUVd6akVEck5HMUpxWmhRM2lid3UtRmdCOHItS1k0TFlzdEd6X3c4WDZTbUxfa284N3k3TEMzWmVHdE1fMjRWTjh0N3NnYVBHVWZSc1ZRUkVhZnBvaXNSS3VNSnQ3MDlsTDBXbC04LXFDZnZyVWJIMUk5SmRvdkFsMGNaTnBjUktkajZVX3lkYnlHcFVDN05ZaEp6U2Q?oc=5" target="_blank">科技公司大舉發債籌資 AI 與雲端擴張</a></div>
 <div class="meta"><span class="source">Reuters</span></div></div>
 
-<div class="news-card"><div class="num">004</div>
+<div class="news-card" data-id="b4"><div class="card-actions"><button onclick="toggleStar('b4',this)" title="收藏">☆</button><button onclick="deepDive('5 月表現最佳的 5 檔 AI 股票','https://news.google.com/rss/articles/CBMijwFBVV95cUxQZ0RPel9KWms3MVEtWUk0eXpGNnlUR3UxSFNFc0ltbEsyZDJBa0VpVTBtQVRTZmNoeTJWVWdSM3k3VllueXRZcjRCdVhfZXZLZ1lxY0J4WGI4SEdCc3BmWTFpXzVseWhuQzcxZEtmeDVjb09oN3NEQW5fUGhnam1iZjN1V3Z2QWNlazNuaXFPSQ?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">004</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxQZ0RPel9KWms3MVEtWUk0eXpGNnlUR3UxSFNFc0ltbEsyZDJBa0VpVTBtQVRTZmNoeTJWVWdSM3k3VllueXRZcjRCdVhfZXZLZ1lxY0J4WGI4SEdCc3BmWTFpXzVseWhuQzcxZEtmeDVjb09oN3NEQW5fUGhnam1iZjN1V3Z2QWNlazNuaXFPSQ?oc=5" target="_blank">5 月表現最佳的 5 檔 AI 股票</a></div>
 <div class="meta"><span class="source">NerdWallet</span></div></div>
 
-<div class="news-card"><div class="num">005</div>
+<div class="news-card" data-id="b5"><div class="card-actions"><button onclick="toggleStar('b5',this)" title="收藏">☆</button><button onclick="deepDive('Bloomberg 分析：AI 熱潮背後的循環交易','https://news.google.com/rss/articles/CBMiakFVX3lxTE8zdHpiekFCLW5Rb216RERxWVNfcVcxaUlzanNVVDdzU1VZNHpNR18zR0ppQXZsNjc5ajZPY0tTWkVaZDVoOFlTYlZzZFZ2N0pQTTh1VXFWWXI2bnc2clFqTmRvWkdwT1ptdUE?oc=5')" title="AI 深度探勘">⚡</button></div><div class="num">005</div>
 <div class="title"><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE8zdHpiekFCLW5Rb216RERxWVNfcVcxaUlzanNVVDdzU1VZNHpNR18zR0ppQXZsNjc5ajZPY0tTWkVaZDVoOFlTYlZzZFZ2N0pQTTh1VXFWWXI2bnc2clFqTmRvWkdwT1ptdUE?oc=5" target="_blank">Bloomberg 分析：AI 熱潮背後的循環交易</a></div>
 <div class="meta"><span class="source">Bloomberg</span></div></div>
 
 </div></div></div>
 
-<!-- GitHub -->
+<!-- Section 4: GitHub -->
 <div class="section section-4" id="sec-gh">
 <div class="section-header">📦 GitHub 熱門 AI 專案<span class="badge">5 個</span></div>
 <div class="section-body"><div class="news-grid">
 
-<div class="gh-card"><div class="top"><a href="https://github.com/wanshuiyin/ARIS-in-AI-Offer" class="repo-name" target="_blank">ARIS-in-AI-Offer</a> <span class="stars">⭐10</span></div>
+<div class="gh-card"><div class="gh-actions"><button onclick="gitClone('https://github.com/wanshuiyin/ARIS-in-AI-Offer.git')" title="複製 Clone 指令">📋</button><button onclick="deepDive('ARIS-in-AI-Offer - GitHub 專案','https://github.com/wanshuiyin/ARIS-in-AI-Offer')" title="AI 深度探勘">⚡</button></div><div class="top"><a href="https://github.com/wanshuiyin/ARIS-in-AI-Offer" class="repo-name" target="_blank">ARIS-in-AI-Offer</a> <span class="stars">⭐10</span></div>
 <div class="desc">AI 面試考古題大全：ML/LLM/多模態重點整理，手機友善排版</div><div class="tags"><span class="tag">求職</span></div></div>
 
-<div class="gh-card"><div class="top"><a href="https://github.com/MuLabPKU/In-Parameter-Learning" class="repo-name" target="_blank">In-Parameter-Learning</a> <span class="stars">⭐10</span></div>
+<div class="gh-card"><div class="gh-actions"><button onclick="gitClone('https://github.com/MuLabPKU/In-Parameter-Learning.git')" title="複製 Clone 指令">📋</button><button onclick="deepDive('In-Parameter-Learning - GitHub 專案','https://github.com/MuLabPKU/In-Parameter-Learning')" title="AI 深度探勘">⚡</button></div><div class="top"><a href="https://github.com/MuLabPKU/In-Parameter-Learning" class="repo-name" target="_blank">In-Parameter-Learning</a> <span class="stars">⭐10</span></div>
 <div class="desc">觀點論文：終身 AI 系統需要的不只是更長上下文</div><div class="tags"><span class="tag">學術</span></div></div>
 
-<div class="gh-card"><div class="top"><a href="https://github.com/jjihwan/LiteFrame" class="repo-name" target="_blank">LiteFrame</a> <span class="stars">⭐8</span></div>
+<div class="gh-card"><div class="gh-actions"><button onclick="gitClone('https://github.com/jjihwan/LiteFrame.git')" title="複製 Clone 指令">📋</button><button onclick="deepDive('LiteFrame - GitHub 專案','https://github.com/jjihwan/LiteFrame')" title="AI 深度探勘">⚡</button></div><div class="top"><a href="https://github.com/jjihwan/LiteFrame" class="repo-name" target="_blank">LiteFrame</a> <span class="stars">⭐8</span></div>
 <div class="desc">高效視覺編碼器解鎖影片 LLM 的幀率擴展能力</div><div class="tags"><span class="tag">影片AI</span></div></div>
 
-<div class="gh-card"><div class="top"><a href="https://github.com/Lynnouo/yushio" class="repo-name" target="_blank">Yushio（夕潮）</a> <span class="stars">⭐8</span></div>
+<div class="gh-card"><div class="gh-actions"><button onclick="gitClone('https://github.com/Lynnouo/yushio.git')" title="複製 Clone 指令">📋</button><button onclick="deepDive('Yushio（夕潮）- GitHub 專案','https://github.com/Lynnouo/yushio')" title="AI 深度探勘">⚡</button></div><div class="top"><a href="https://github.com/Lynnouo/yushio" class="repo-name" target="_blank">Yushio（夕潮）</a> <span class="stars">⭐8</span></div>
 <div class="desc">為 Claude Code 設計的 AI 協作人格，三層技能系統</div><div class="tags"><span class="tag">AI工具</span></div></div>
 
-<div class="gh-card"><div class="top"><a href="https://github.com/osirishorus/opencoffer" class="repo-name" target="_blank">opencoffer</a> <span class="stars">⭐5</span></div>
+<div class="gh-card"><div class="gh-actions"><button onclick="gitClone('https://github.com/osirishorus/opencoffer.git')" title="複製 Clone 指令">📋</button><button onclick="deepDive('opencoffer - GitHub 專案','https://github.com/osirishorus/opencoffer')" title="AI 深度探勘">⚡</button></div><div class="top"><a href="https://github.com/osirishorus/opencoffer" class="repo-name" target="_blank">opencoffer</a> <span class="stars">⭐5</span></div>
 <div class="desc">自託管理財：SimpleFIN 同步 + BYO-LLM + MCP 端點</div><div class="tags"><span class="tag">理財</span></div></div>
 
 </div></div></div>
 
 <div class="footer">
-🔍 有興趣的主題告訴我，幫你深入追蹤 · <a href="https://Ray-jong.github.io/ai-daily-report/ai-report-2026-05-19.html" target="_blank">47 則完整版</a>
+🔍 有興趣的主題跟我說，幫你深入追蹤 · <a href="https://Ray-jong.github.io/ai-daily-report/ai-report-2026-05-19.html" target="_blank">47 則完整版</a>
 </div>
 
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到頂部">↑</button>
 
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+<div class="modal" id="modalContent">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 id="modalTitle">標題</h2>
+<div class="modal-link" id="modalLink">連結</div>
+<div id="modalBody">
+<p style="font-size:13px;color:#64748b;line-height:1.5">此新聞已準備好供 AI Agent 深入分析。</p>
+<div class="modal-actions">
+<button class="btn-primary" onclick="sendToAgent()">🤖 傳送給 Hermes Agent</button>
+<button class="btn-secondary" onclick="copyToClipboard(document.getElementById('modalTitle').textContent+' - '+document.getElementById('modalLink').textContent)">📋 複製全文</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
 <script>
-// Greeting
+// ===== Greeting & Clock =====
 (function(){
 var h=new Date().getHours();
 var g=document.getElementById('greetingText');
-var e='☀️';
-if(h<12){g.textContent='☀️ 早安';e='☀️'}
-else if(h<18){g.textContent='🌤️ 午安';e='🌤️'}
-else{g.textContent='🌙 晚安';e='🌙'}
-// Clock
+if(h<12){g.textContent='☀️ 早安'}
+else if(h<18){g.textContent='🌤️ 午安'}
+else{g.textContent='🌙 晚安'}
 function tick(){
 var n=new Date();
 document.getElementById('clockDisplay').textContent=n.toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});
 }
 tick();setInterval(tick,10000);
-// Back to top
+})();
+
+// ===== Back to Top =====
 window.addEventListener('scroll',function(){
 document.getElementById('backToTop').classList.toggle('show',window.scrollY>300);
 });
-// Weather (static for Taipei)
-var w=document.getElementById('weatherDisplay');
-w.innerHTML='<span class="emoji">☁️</span> 台北 26°C';
-// Tip rotation
-var tips=['💡 點數字快速跳轉區塊','🔍 點標題閱讀原文','📋 滑鼠移過卡片可複製連結','⬆️ 往下滑出現回到頂部按鈕'];
+
+// ===== Tip rotation =====
+var tips=['💡 點上方數字篩選新聞區塊','🔍 點標題閱讀原文','⚡ 點⚡讓 Agent 深度探勘','⭐ 點☆收藏稍後閱讀','📋 GitHub 專案可複製 Clone 指令'];
 var ti=0;
-setInterval(function(){ti=(ti+1)%tips.length;document.getElementById('tipText').textContent=tips[ti];},8000);
-})();
+setInterval(function(){ti=(ti+1)%tips.length;var el=document.getElementById('tipText');if(el)el.textContent=tips[ti];},8000);
+
+// ===== Toast =====
+function showToast(msg){
+var t=document.getElementById('toast');
+t.textContent=msg;t.classList.add('show');
+setTimeout(function(){t.classList.remove('show');},2000);
+}
+
+// ===== Filter / View =====
+var currentFilter=0;
+function toggleFilter(n){
+if(currentFilter===n){setView(0);return}
+setView(n);
+}
+function setView(n){
+currentFilter=n;
+document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+document.querySelectorAll('.stat-card').forEach(function(b){b.classList.remove('active');});
+document.querySelectorAll('.section').forEach(function(s){s.classList.remove('hidden');});
+if(n===0){
+// All
+return;
+}
+// Highlight filter & stat
+var fb=document.querySelector('.filter-btn.f'+n);if(fb)fb.classList.add('active');
+var sc=document.querySelector('.stat-card[data-filter="'+n+'"]');if(sc)sc.classList.add('active');
+// Show only matching section
+document.querySelectorAll('.section').forEach(function(s){
+var isMatch=false;
+if(n===1 && s.classList.contains('section-1')) isMatch=true;
+if(n===2 && s.classList.contains('section-2')) isMatch=true;
+if(n===3 && s.classList.contains('section-3')) isMatch=true;
+if(n===4 && s.classList.contains('section-4')) isMatch=true;
+if(!isMatch)s.classList.add('hidden');
+});
+// Scroll to section
+var target=document.querySelector('.section-'+(n===4?4:n));
+if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ===== Perspective =====
+var perspectives={
+'influencer':'📱 網紅行銷視角：此新聞對 KOL 合作、帶貨選品與內容創作的潛在影響。',
+'logistics':'📦 物流自動化視角：此新聞對倉儲管理、配送效率與供應鏈 AI 的意涵。',
+'ecommerce':'🛒 電商營運視角：此新聞對平台營運、消費者體驗與轉換率的影響。',
+'investor':'💰 投資人視角：此新聞對市場趨勢、投資標的與風險評估的參考價值。'
+};
+function changePerspective(val){
+var tip=document.getElementById('tipText');
+if(val && perspectives[val]){
+tip.textContent=perspectives[val];
+}else{
+tip.textContent='🎯 一般觀點';
+}
+}
+
+// ===== Deep Dive =====
+var currentDiveTitle='';
+var currentDiveUrl='';
+function deepDive(title,url){
+currentDiveTitle=title;
+currentDiveUrl=url;
+document.getElementById('modalTitle').textContent=title;
+document.getElementById('modalLink').textContent=url;
+document.getElementById('modalOverlay').classList.add('show');
+}
+function closeModal(e){
+if(e && e.target!==document.getElementById('modalOverlay'))return;
+document.getElementById('modalOverlay').classList.remove('show');
+}
+function sendToAgent(){
+var txt='請幫我深入分析這則新聞：\n【'+currentDiveTitle+'】\n'+currentDiveUrl;
+copyToClipboard(txt);
+showToast('✅ 已複製！貼到 Hermes 對話中即可分析');
+closeModal();
+}
+
+// ===== Copy =====
+function copyToClipboard(txt){
+if(navigator.clipboard){navigator.clipboard.writeText(txt);}
+else{
+var ta=document.createElement('textarea');ta.value=txt;
+document.body.appendChild(ta);ta.select();document.execCommand('copy');
+document.body.removeChild(ta);
+}
+}
+
+// ===== Star / Bookmark =====
+function getBookmarks(){
+try{return JSON.parse(localStorage.getItem('ai_digest_stars')||'[]');}catch(e){return[]}
+}
+function saveBookmarks(arr){
+localStorage.setItem('ai_digest_stars',JSON.stringify(arr));
+}
+function toggleStar(id,btn){
+var stars=getBookmarks();
+var idx=stars.indexOf(id);
+if(idx>-1){stars.splice(idx,1);btn.textContent='☆';btn.classList.remove('starred');}
+else{stars.push(id);btn.textContent='★';btn.classList.add('starred');}
+saveBookmarks(stars);
+updateBookmarkBar();
+}
+function updateBookmarkBar(){
+var stars=getBookmarks();
+var bar=document.getElementById('bookmarkBar');
+var count=document.getElementById('bmbCount');
+count.textContent=stars.length;
+if(stars.length>0){bar.classList.add('show');}
+else{bar.classList.remove('show');}
+// Restore star states on load
+document.querySelectorAll('.news-card [data-id]').forEach(function(card){
+var id=card.getAttribute('data-id');
+var btn=card.querySelector('.card-actions button:first-child');
+if(btn && stars.indexOf(id)>-1){btn.textContent='★';btn.classList.add('starred');}
+});
+}
+function clearBookmarks(){
+localStorage.removeItem('ai_digest_stars');
+updateBookmarkBar();
+showToast('🗑️ 書籤已清除');
+}
+function showBookmarks(){
+var stars=getBookmarks();
+if(stars.length===0){showToast('⭐ 還沒有收藏任何新聞');return}
+// Filter to show only bookmarked cards
+document.querySelectorAll('.section').forEach(function(s){s.classList.add('hidden');});
+document.querySelectorAll('.news-card').forEach(function(c){
+var id=c.getAttribute('data-id');
+if(stars.indexOf(id)>-1){
+c.closest('.section').classList.remove('hidden');
+}
+});
+showToast('⭐ 顯示 '+stars.length+' 則收藏');
+}
+// Restore bookmarks on load
+document.addEventListener('DOMContentLoaded',updateBookmarkBar);
+
+// ===== Git Clone =====
+function gitClone(url){
+copyToClipboard('git clone '+url);
+showToast('📋 已複製 Clone 指令');
+}
+
+// ===== Keyboard shortcuts =====
+document.addEventListener('keydown',function(e){
+if(e.key==='Escape')closeModal({target:document.getElementById('modalOverlay')});
+});
 </script>
 
 </div>
