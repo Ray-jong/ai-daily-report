@@ -197,6 +197,9 @@ body{
 .modal .modal-actions .btn-primary:hover{background:#16213e}
 .modal .modal-actions .btn-secondary{background:#f1f5f9;color:#1a1a2e}
 .modal .modal-actions .btn-secondary:hover{background:#e2e8f0}
+.modal-persp{font-size:11px;padding:4px 10px;border-radius:100px;border:1px solid #e0e0e0;background:#fff;color:#64748b;cursor:pointer;transition:all 0.15s}
+.modal-persp:hover{border-color:#3b82f6;color:#3b82f6}
+.modal-persp.active{background:#1a1a2e;color:#fff;border-color:#1a1a2e}
 
 /* Toast */
 .toast{
@@ -412,10 +415,33 @@ body{
 <h2 id="modalTitle">標題</h2>
 <div class="modal-link" id="modalLink">連結</div>
 <div id="modalBody">
-<p style="font-size:13px;color:#64748b;line-height:1.5">此新聞已準備好供 AI Agent 深入分析。</p>
-<div class="modal-actions">
+
+<!-- Perspective tabs inside modal -->
+<div style="display:flex;gap:4px;flex-wrap:wrap;margin:10px 0">
+<button class="modal-persp active" data-persp="general" onclick="selectModalPersp(this)">🎯 一般</button>
+<button class="modal-persp" data-persp="influencer" onclick="selectModalPersp(this)">📱 網紅行銷</button>
+<button class="modal-persp" data-persp="logistics" onclick="selectModalPersp(this)">📦 物流自動化</button>
+<button class="modal-persp" data-persp="ecommerce" onclick="selectModalPersp(this)">🛒 電商營運</button>
+<button class="modal-persp" data-persp="investor" onclick="selectModalPersp(this)">💰 投資人</button>
+</div>
+
+<!-- Analysis type selector -->
+<div style="margin:10px 0">
+<select id="modalAnalysisType" onchange="updatePromptPreview()" style="width:100%;font-size:12px;padding:8px 12px;border-radius:8px;border:1px solid #e0e0e0;background:#fff;color:#1a1a2e;cursor:pointer;outline:none">
+<option value="summary">📝 重點摘要與分析</option>
+<option value="impact">🎯 產業影響與趨勢</option>
+<option value="tools">🔧 相關工具與開源資源</option>
+<option value="action">⚡ 行動建議與策略</option>
+</select>
+</div>
+
+<!-- Generated prompt preview -->
+<div style="background:#f8f6f3;border-radius:8px;padding:12px;margin:10px 0;font-size:12px;color:#1a1a2e;line-height:1.6;max-height:160px;overflow-y:auto;border:1px solid #f0ebe4" id="promptPreview">
+正在準備分析提示...</div>
+
+<div class="modal-actions" style="margin-top:12px">
 <button class="btn-primary" onclick="sendToAgent()">🤖 傳送給 Hermes Agent</button>
-<button class="btn-secondary" onclick="copyToClipboard(document.getElementById('modalTitle').textContent+' - '+document.getElementById('modalLink').textContent)">📋 複製全文</button>
+<button class="btn-secondary" onclick="copyPrompt()">📋 複製分析提示</button>
 </div>
 </div>
 </div>
@@ -489,40 +515,89 @@ if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 // ===== Perspective =====
-var perspectives={
-'influencer':'📱 網紅行銷視角：此新聞對 KOL 合作、帶貨選品與內容創作的潛在影響。',
-'logistics':'📦 物流自動化視角：此新聞對倉儲管理、配送效率與供應鏈 AI 的意涵。',
-'ecommerce':'🛒 電商營運視角：此新聞對平台營運、消費者體驗與轉換率的影響。',
-'investor':'💰 投資人視角：此新聞對市場趨勢、投資標的與風險評估的參考價值。'
-};
+var activePersp='general';
 function changePerspective(val){
+activePersp=val||'general';
+// Update toolbar tip
 var tip=document.getElementById('tipText');
-if(val && perspectives[val]){
-tip.textContent=perspectives[val];
-}else{
-tip.textContent='🎯 一般觀點';
-}
+var labels={'general':'🎯 一般觀點','influencer':'📱 網紅行銷視角：關注 KOL 合作、帶貨選品與內容創作影響','logistics':'📦 物流自動化視角：關注倉儲管理、配送效率與供應鏈 AI','ecommerce':'🛒 電商營運視角：關注平台營運、消費者體驗與轉換率','investor':'💰 投資人視角：關注市場趨勢、投資標的與風險評估'};
+if(tip)tip.textContent=labels[activePersp]||labels.general;
 }
 
-// ===== Deep Dive =====
+// ===== Deep Dive Modal =====
 var currentDiveTitle='';
 var currentDiveUrl='';
+
 function deepDive(title,url){
 currentDiveTitle=title;
 currentDiveUrl=url;
 document.getElementById('modalTitle').textContent=title;
 document.getElementById('modalLink').textContent=url;
+// Sync toolbar perspective into modal
+document.querySelectorAll('.modal-persp').forEach(function(b){b.classList.remove('active');});
+var tbPersp=document.getElementById('viewSelect').value||'general';
+var perspBtn=document.querySelector('.modal-persp[data-persp="'+tbPersp+'"]');
+if(perspBtn){perspBtn.classList.add('active');activePersp=tbPersp;}
+else{document.querySelector('.modal-persp[data-persp="general"]').classList.add('active');activePersp='general';}
+// Reset analysis type to summary
+document.getElementById('modalAnalysisType').value='summary';
+// Generate prompt
+updatePromptPreview();
 document.getElementById('modalOverlay').classList.add('show');
 }
 function closeModal(e){
 if(e && e.target!==document.getElementById('modalOverlay'))return;
 document.getElementById('modalOverlay').classList.remove('show');
 }
+function selectModalPersp(btn){
+document.querySelectorAll('.modal-persp').forEach(function(b){b.classList.remove('active');});
+btn.classList.add('active');
+activePersp=btn.getAttribute('data-persp');
+// Sync back to toolbar
+document.getElementById('viewSelect').value=activePersp;
+changePerspective(activePersp);
+updatePromptPreview();
+}
+
+function updatePromptPreview(){
+var type=document.getElementById('modalAnalysisType').value;
+var perspLabel={'general':'一般','influencer':'網紅行銷','logistics':'物流自動化','ecommerce':'電商營運','investor':'投資人'}[activePersp]||'一般';
+var typeLabel={'summary':'重點摘要','impact':'產業影響','tools':'工具資源','action':'行動建議'}[type]||'分析';
+var title=currentDiveTitle;
+var url=currentDiveUrl;
+var prompt='請從<strong>「'+perspLabel+'」</strong>視角，對此新聞進行<strong>'+typeLabel+'</strong>：\n\n';
+prompt+='【新聞標題】'+title+'\n';
+prompt+='【原文連結】'+url+'\n\n';
+switch(type){
+case'summary':
+prompt+='請提供：\n1. 核心觀點摘要（100字內）\n2. 關鍵數據/事實\n3. '+(activePersp==='general'?'對整體產業的意義':activePersp==='influencer'?'對網紅行銷策略的啟示':activePersp==='logistics'?'對物流自動化的影響':activePersp==='ecommerce'?'對電商營運的意涵':'對投資決策的參考')+'\n4. 後續值得關注的發展方向';
+break;
+case'impact':
+prompt+='請分析：\n1. 此新聞標誌著什麼趨勢轉折點\n2. '+(activePersp==='influencer'?'內容創作與帶貨產業鏈的變化':activePersp==='logistics'?'倉儲物流業的結構性影響':activePersp==='ecommerce'?'電商平台的競爭格局變化':'相關市場的短期與長期影響')+'\n3. 可能受衝擊/受惠的群體\n4. 時間軸預測（3個月/6個月/1年）';
+break;
+case'tools':
+prompt+='請列出：\n1. 與此新聞直接相關的開源專案或工具\n2. 可用於追蹤此趨勢的監控資源\n3. 建議關注的專家/研究機構\n4. 推薦的學習資源或文獻';
+break;
+case'action':
+prompt+='請提供可操作的建議：\n1. '+(activePersp==='influencer'?'網紅/創作者可採取的具體行動':activePersp==='logistics'?'物流業者可考慮的策略調整':activePersp==='ecommerce'?'電商從業者的應對方案':'企業應如何因應此趨勢')+'\n2. 風險與機遇評估\n3. 優先級排序（立即/短期/長期）\n4. 需要監控的關鍵指標';
+break;
+}
+document.getElementById('promptPreview').innerHTML=prompt.replace(/\n/g,'<br>');
+}
+
 function sendToAgent(){
-var txt='請幫我深入分析這則新聞：\n【'+currentDiveTitle+'】\n'+currentDiveUrl;
-copyToClipboard(txt);
-showToast('✅ 已複製！貼到 Hermes 對話中即可分析');
+var preview=document.getElementById('promptPreview');
+var plainText=preview.textContent||preview.innerText;
+copyToClipboard(plainText);
+showToast('✅ 分析提示已複製！貼到 Hermes 即可深入分析');
 closeModal();
+}
+
+function copyPrompt(){
+var preview=document.getElementById('promptPreview');
+var plainText=preview.textContent||preview.innerText;
+copyToClipboard(plainText);
+showToast('📋 分析提示已複製！');
 }
 
 // ===== Copy =====
